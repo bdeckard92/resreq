@@ -1,10 +1,24 @@
 $(document).ready(function() {
+
+  var profile1;
+
+  var options = {
+  rememberLastLogin: true,
+  autoclose: true,
+  auth: {
+    redirect: false
+  }
+};
   
-  var lock = new Auth0Lock('w0afrsXkjEvuLPkJAmX7iI3GhWDVKTFB', 'bchang55.auth0.com', {
+  var lock = new Auth0Lock('w0afrsXkjEvuLPkJAmX7iI3GhWDVKTFB', 'bchang55.auth0.com', options, {
     auth: {
-      params: { scope: 'openid email'  } //Details: https://auth0.com/docs/scopes
+      params: { scope: 'openid name email'  } //Details: https://auth0.com/docs/scopes
     }
   });
+
+  // hide logout button on initial load
+  $('.btn-logout').hide();
+  $('.avatar').hide();
 
   $('.btn-login').click(function(e) {
     e.preventDefault();
@@ -18,12 +32,13 @@ $(document).ready(function() {
   })
 
   lock.on("authenticated", function(authResult) {
-    lock.getProfile(authResult.idToken, function(error, profile) {
+    lock.getUserInfo(authResult.accessToken, function(error, profile) {
       if (error) {
         // Handle error
         return;
       }
-      localStorage.setItem('id_token', authResult.idToken);
+      // profile1 = profile;
+      localStorage.setItem('access_token', authResult.accessToken);
       // Display user information
       show_profile_info(profile);
     });
@@ -31,20 +46,23 @@ $(document).ready(function() {
 
   //retrieve the profile:
   var retrieve_profile = function() {
-    var id_token = localStorage.getItem('id_token');
-    if (id_token) {
-      lock.getProfile(id_token, function (err, profile) {
+    var access_token = localStorage.getItem('accessToken');
+    if (access_token) {
+      lock.getUserInfo(access_token, function (err, profile) {
         if (err) {
           return alert('There was an error getting the profile: ' + err.message);
         }
         // Display user information
         show_profile_info(profile);
+        console.log(profile);
       });
     }
   };
 
   var show_profile_info = function(profile) {
+    profile1 = profile;
      $('.nickname').text(profile.nickname);
+     $('.nickname').show();
      $('.btn-login').hide();
      $('.avatar').attr('src', profile.picture).show();
      $('.btn-logout').show();
