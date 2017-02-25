@@ -13,7 +13,7 @@
     <div class="container">
         <div class="">
             <h1> <span class = "glyphicon glyphicon-th-list"></span> Create or Update your menu</h1>
-            <h4>On this page you can create and update you menu by entering your category, item, description, and price</h4>
+            <h4>On this page you can create and update your menu by entering your item, description, and price</h4>
         </div>
         <div class="row">
             <div class="col-large-12">
@@ -36,7 +36,7 @@
                                 <input type="text" class="form-control" id="appPrice">
                                  </div>
                             
-                            <button type="submit" class="btn btn-success submit">Add Item</button>
+                            <button type="submit" class="btn btn-success submit" id ="appetizer_btn">Add Item</button>
                         </div>
                             </div>
                         </form>
@@ -52,7 +52,7 @@
                                     <input type="text" class="form-control" id="entre">
                                 </div>
                                  <div class="form-group">
-                                        <label for="desDesc">Entre Dessert description</label>
+                                        <label for="desDesc">Entre description</label>
                                         <input type="text" class="form-control" id="desDesc">
                                     </div>
                                 <div class="form-group">
@@ -61,9 +61,10 @@
                                 </div>
                                  </div>
                             
-                            <button type="submit" class="btn btn-success submit">Add Item</button>
+                            <button type="submit" class="btn btn-success submit" id= "entre_btn">Add Item</button>
                         </div>
-                        </div>
+                        </form>
+                        
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>Dessert</strong></h3>
@@ -84,9 +85,10 @@
                                     </div>
                             </div>
                             
-                            <button type="submit" class="btn btn-success submit">Add Item</button>
+                            <button type="submit" class="btn btn-success submit" id="dessert_btn">Add Item</button>
                         </div>
                     </div>
+
                     </form>
                 </div>
             </div>
@@ -103,11 +105,7 @@
                     isValid = false;
                 }
             });
-            $(".chosen-select").each(function() {
-                if ($(this).val() == " ") {
-                    isValid = false;
-                }
-            });
+           
             return isValid;
         }
         if (validateForm()) {
