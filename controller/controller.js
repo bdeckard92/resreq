@@ -12,10 +12,5 @@ var db = require("../models");
 
 
 
-// Default to home page
-  router.use(function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-  });
-
 
   module.exports = router;

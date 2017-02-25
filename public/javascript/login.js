@@ -1,13 +1,14 @@
 $(document).ready(function() {
   
-  var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
+  var lock = new Auth0Lock('w0afrsXkjEvuLPkJAmX7iI3GhWDVKTFB', 'bchang55.auth0.com', {
     auth: {
-      params: { scope: 'openid email' } //Details: https://auth0.com/docs/scopes
+      params: { scope: 'openid email'  } //Details: https://auth0.com/docs/scopes
     }
   });
 
   $('.btn-login').click(function(e) {
     e.preventDefault();
+    console.log('hello');
     lock.show();
   });
 
