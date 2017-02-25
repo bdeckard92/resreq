@@ -60,12 +60,32 @@ $(document).ready(function () {
         // Handle error
         return;
       }
-
+      sendUserDataDB(profile);
       localStorage.setItem('access_token', authResult.accessToken);
       // Display user information
       show_profile_info(profile);
     });
   });
+
+  function sendUserDataDB(newUser){
+    var currentURL = window.location.origin;
+    
+    var newUserObject = {
+      email: newUser.email,
+      username: newUser.nickname,
+      firstname: newUser.givenName,
+      lastname: newUser.familyName,
+    };
+
+    $.post(currentURL+"/api/newUser", newUserObject, null, 'json').then(function (data) {
+                    console.log(data);
+                    
+                }, function (err) {
+                    console.log(err);                   
+                });
+
+
+  }
 
   //retrieve the profile:
   var retrieve_profile = function () {
