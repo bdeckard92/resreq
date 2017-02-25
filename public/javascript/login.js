@@ -21,9 +21,11 @@ $(document).ready(function () {
         // Remove expired token (if any) from localStorage
         localStorage.removeItem('access_token');
         return alert('There was an error getting the profile: ' + err.message);
-      } // 
+      } 
       else {
+        // log user in and show their profile info
         retrieve_profile();
+        show_profile_info(profile);
         console.log("user authenticated");
       }
     });
@@ -44,7 +46,6 @@ $(document).ready(function () {
 
   $('.btn-login').click(function (e) {
     e.preventDefault();
-    console.log('hello');
     lock.show();
   });
 
