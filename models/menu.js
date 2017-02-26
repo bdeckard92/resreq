@@ -1,0 +1,59 @@
+module.exports = function(sequelize, DataTypes) {
+	var Start = sequelize.define("Start", {
+		Name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				len: [1]
+			}
+		},
+		Info: {
+			type: DataTypes.TEXT,
+			allowNull: false,
+			len: [1]
+		}
+		Price: {
+		type: DataTypes.INTERGER,
+		allowNull: false
+	}
+});
+	var Entre = sequelize.define("Entre", {
+		Name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				len: [1]
+			}
+		},
+		Info: {
+			type: DataTypes.TEXT,
+			allowNull: false,
+			len: [1]
+		}
+		Price: {
+		type: DataTypes.INTERGER,
+		allowNull: false
+	}
+	});
+	var Dessert = sequelize.define("Dessert", {
+		Name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				len: [1]
+			}
+		},
+		Info: {
+			type: DataTypes.TEXT,
+			allowNull: false,
+			len: [1]
+		}
+		Price: {
+		type: DataTypes.INTERGER,
+		allowNull: false
+	}
+});
+	return Start;
+	return Entre;
+	return Dessert;
+};
