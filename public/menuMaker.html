@@ -73,7 +73,7 @@
                                 <form type="POST" role="form">
                                     <div class="form-group">
                                         <label for="dessert">Enter Dessert item</label>
-                                        <input type="text" class="form-control" id="Entre">
+                                        <input type="text" class="form-control" id="dessert">
                                     </div>
                                     <div class="form-group">
                                         <label for="desDesc">Dessert description</label>
@@ -96,7 +96,7 @@
     </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js "></script>
-    <script type="text/javascript " src="../data/friends.js ">
+    <!--<script type="text/javascript " src="../data/friends.js ">
     $("#submit").on("click", function() {
         function validateForm() {
             var isValid = true;
@@ -112,26 +112,16 @@
             var userData = {
                 name: $(".name").val(),
                 photo: $(".photo").val(),
-                scores: [
-                    $(".q1)").val(),
-                    $(".q2)").val(),
-                    $(".q3)").val(),
-                    $(".q4)").val(),
-                    $(".q5)").val(),
-                    $(".q6)").val(),
-                    $(".q7)").val(),
-                    $(".q8)").val(),
-                    $(".q9)").val(),
-                    $(".q10)").val()
+                
                 ]
             };
             var currentURL = window.location.origin;
-            $.post(currentURL + "/api/friends", userData, function(data) {
+            $.post(currentURL + "/", userData, function(data) {
                 alert("working");
             })
         }
     })
-    </script>
+    </script>-->
 </body>
 
 </html>
