@@ -4,26 +4,40 @@ var path = require("path");
 var db = require("../models");
 
 
-  // Direct to home page
-  router.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-  });
-
-
-// Listen for burger owner
-router.post("/api/newUser", function(req, res){
-    
-    // db.users.create
-
-    // var newBurgOwner = {
-    //     ownerName: req.body.name,
-    //     burgerId: req.params.id
-    // };
-    // db.burger_owner.create(newBurgOwner).then(function(result){
-    //     res.json("Owner has been updated");
-    //     res.redirect("/");
-    // });
+// Direct to home page
+router.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 
-  module.exports = router;
+// Listen for burger owner
+router.post("/api/newUser", function (req, res) {
+  // user's email will be unique
+  var checkEmail = req.body.email;
+  // creating object to send to db
+  var userObject = {
+    first_name: req.body.firstname,
+    last_name: req.body.lastname,
+    user_name: req.body.username,
+    email: req.body.email
+  };
+
+  // check if the e-mail exists, add the user if no email
+  db.users.findAll({
+    where: {
+      email: checkEmail
+    }
+  })
+    .then(function (result) {
+      if (result.length === 0) {
+        db.users.create(userObject).then(function (result) {
+          res.json("new user has been added");
+        });
+      }
+    });
+
+
+});
+
+
+module.exports = router;
