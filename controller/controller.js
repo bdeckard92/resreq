@@ -12,7 +12,7 @@ var db = require("../models");
 
 // Listen for burger owner
 router.post("/api/newUser", function(req, res){
-
+    
     // db.users.create
 
     // var newBurgOwner = {

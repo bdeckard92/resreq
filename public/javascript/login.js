@@ -19,8 +19,8 @@ $(document).ready(function () {
     lock.getUserInfo(access_token, function (err, profile) {
       if (err) {
         // Remove expired token (if any) from localStorage
-        localStorage.removeItem('access_token');
-        return alert('There was an error getting the profile: ' + err.message);
+        return localStorage.removeItem('access_token');
+        // return alert('There was an error getting the profile: ' + err.message);
       } 
       else {
         // log user in and show their profile info
@@ -41,9 +41,6 @@ $(document).ready(function () {
   };
 
   
-
-
-
   $('.btn-login').click(function (e) {
     e.preventDefault();
     lock.show();
@@ -77,12 +74,31 @@ $(document).ready(function () {
       lastname: newUser.familyName,
     };
 
-    $.post(currentURL+"/api/newUser", newUserObject, null, 'json').then(function (data) {
+
+    $.post(currentURL+"/api/newUser", newUserObject).then(function (data) {
                     console.log(data);
+                    console.log("new user data sent");
                     
                 }, function (err) {
                     console.log(err);                   
                 });
+
+//     $.ajax({
+//     url : "/api/newUser",
+//     type: "POST",
+//     dataType: "json",
+//     data : JSON.stringify(newUserObject),
+//     success: function(data, textStatus, jqXHR)
+//     {
+//         //data - response from server
+//         console.log(data);
+//         console.log("new user data sent");
+//     },
+//     error: function (jqXHR, textStatus, errorThrown)
+//     {
+ 
+//     }
+// });
 
 
   }
