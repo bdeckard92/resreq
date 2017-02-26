@@ -31,6 +31,7 @@ $(document).ready(function () {
     });
   }
 
+
   var options = {
     rememberLastLogin: true,
     autoclose: true,
@@ -38,6 +39,7 @@ $(document).ready(function () {
       redirect: false
     }
   };
+
   
   $('.btn-login').click(function (e) {
     e.preventDefault();
@@ -80,7 +82,6 @@ $(document).ready(function () {
                 }, function (err) {
                     console.log(err);                   
                 });
-// Alternate ajax post for testing
 
 //     $.ajax({
 //     url : "/api/newUser",

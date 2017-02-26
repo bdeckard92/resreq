@@ -23,6 +23,7 @@ app.use(bodyParser.json({
 
 // always add body parser settings BEFORE the route
 var routes = require("./controller/controller.js");
+
 app.use("/", routes);
 
 
