@@ -21,15 +21,18 @@ app.use(bodyParser.json({
   type: "application/vnd.api+json"
 }));
 
-// always add body parser settings BEFORE the route
-var routes = require("./controller/controller.js");
-
-app.use("/", routes);
-
-
-
 // Point app to the public directory
 app.use(express.static(path.join(__dirname,'./public')));
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+
+// always add body parser settings BEFORE the route
+var routes = require("./controller/controller.js");
+app.use("/", routes);
 
 // {force: true}
 db.sequelize.sync().then(function () {

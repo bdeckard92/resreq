@@ -2,6 +2,7 @@ $(document).ready(function () {
   // hide logout button on initial load
   $('.btn-logout').hide();
   $('.avatar').hide();
+  $("#mainPageContent").hide();
 
   var lock = new Auth0Lock('w0afrsXkjEvuLPkJAmX7iI3GhWDVKTFB', 'bchang55.auth0.com', options, {
     auth: {
@@ -26,11 +27,11 @@ $(document).ready(function () {
         // log user in and show their profile info
         retrieve_profile();
         show_profile_info(profile);
+        $("#mainPageContent").show();
         console.log("user authenticated");
       }
     });
   }
-
 
   var options = {
     rememberLastLogin: true,
@@ -39,7 +40,6 @@ $(document).ready(function () {
       redirect: false
     }
   };
-
   
   $('.btn-login').click(function (e) {
     e.preventDefault();
@@ -61,6 +61,8 @@ $(document).ready(function () {
       localStorage.setItem('access_token', authResult.accessToken);
       // Display user information
       show_profile_info(profile);
+      // Display page data
+      $("#mainPageContent").show();
     });
   });
 
@@ -82,6 +84,7 @@ $(document).ready(function () {
                 }, function (err) {
                     console.log(err);                   
                 });
+// Alternate ajax post for testing
 
 //     $.ajax({
 //     url : "/api/newUser",
@@ -129,6 +132,7 @@ $(document).ready(function () {
   var logout = function () {
     localStorage.removeItem('access_token');
     window.location.href = "/";
+    $("#mainPageContent").hide();
   };
 
   retrieve_profile();

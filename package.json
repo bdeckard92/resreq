@@ -24,6 +24,7 @@
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
     "express-session": "^1.15.1",
     "express-stormpath": "^3.2.0",
     "lockr": "^0.8.4",
