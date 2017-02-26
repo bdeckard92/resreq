@@ -11,9 +11,9 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.TEXT,
 			allowNull: false,
 			len: [1]
-		}
+		},
 		Price: {
-		type: DataTypes.INTERGER,
+		type: DataTypes.INTEGER,
 		allowNull: false
 	}
 });
@@ -29,9 +29,9 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.TEXT,
 			allowNull: false,
 			len: [1]
-		}
+		},
 		Price: {
-		type: DataTypes.INTERGER,
+		type: DataTypes.INTEGER,
 		allowNull: false
 	}
 	});
@@ -47,9 +47,9 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.TEXT,
 			allowNull: false,
 			len: [1]
-		}
+		},
 		Price: {
-		type: DataTypes.INTERGER,
+		type: DataTypes.INTEGER,
 		allowNull: false
 	}
 });
