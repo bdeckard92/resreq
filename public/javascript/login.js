@@ -35,10 +35,11 @@ $(document).ready(function () {
 
   var options = {
     rememberLastLogin: true,
-    autoclose: true,
     auth: {
       redirect: false
-    }
+    },
+    autoclose: true
+    
   };
   
   $('.btn-login').click(function (e) {
@@ -80,6 +81,7 @@ $(document).ready(function () {
     $.post(currentURL+"/api/newUser", newUserObject).then(function (data) {
                     console.log(data);
                     console.log("new user data sent");
+                    
                     
                 }, function (err) {
                     console.log(err);                   
