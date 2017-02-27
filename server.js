@@ -25,9 +25,9 @@ app.use(bodyParser.json({
 app.use(express.static(path.join(__dirname,'./public')));
 
 // Set Handlebars.
-var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+// var exphbs = require("express-handlebars");
+// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
 
 
 // always add body parser settings BEFORE the route

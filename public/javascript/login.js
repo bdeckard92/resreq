@@ -4,6 +4,15 @@ $(document).ready(function () {
   $('.avatar').hide();
   $("#mainPageContent").hide();
 
+  var options = {
+    rememberLastLogin: true,
+    auth: {
+      redirect: false
+    },
+    autoclose: true
+
+  };
+
   var lock = new Auth0Lock('w0afrsXkjEvuLPkJAmX7iI3GhWDVKTFB', 'bchang55.auth0.com', options, {
     auth: {
       params: {
@@ -22,7 +31,7 @@ $(document).ready(function () {
         // Remove expired token (if any) from localStorage
         return localStorage.removeItem('access_token');
         // return alert('There was an error getting the profile: ' + err.message);
-      } 
+      }
       else {
         // log user in and show their profile info
         retrieve_profile();
@@ -33,15 +42,8 @@ $(document).ready(function () {
     });
   }
 
-  var options = {
-    rememberLastLogin: true,
-    auth: {
-      redirect: false
-    },
-    autoclose: true
-    
-  };
-  
+
+
   $('.btn-login').click(function (e) {
     e.preventDefault();
     lock.show();
@@ -69,7 +71,7 @@ $(document).ready(function () {
 
   function sendUserDataDB(newUser){
     var currentURL = window.location.origin;
-    
+
     var newUserObject = {
       email: newUser.email,
       username: newUser.nickname,
@@ -81,10 +83,10 @@ $(document).ready(function () {
     $.post(currentURL+"/api/newUser", newUserObject).then(function (data) {
                     console.log(data);
                     console.log("new user data sent");
-                    
-                    
+
+
                 }, function (err) {
-                    console.log(err);                   
+                    console.log(err);
                 });
 // Alternate ajax post for testing
 
@@ -101,7 +103,7 @@ $(document).ready(function () {
 //     },
 //     error: function (jqXHR, textStatus, errorThrown)
 //     {
- 
+
 //     }
 // });
 

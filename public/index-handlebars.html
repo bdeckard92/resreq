@@ -27,7 +27,11 @@
 </head>
 
 <body>
+	<!--link to auth0 authentication-->
 	<script src='javascript/login.js'></script>
+	<!--link to handlebars-->
+	<script src='javascript/login-hb.js'></script>
+
 	<div class="container">
 
 		<div class="page-header">
@@ -40,10 +44,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 
 		<div id="mainPageContent" class="container">
 			<div class="row">
@@ -59,16 +59,23 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Main Page</h1>
-					<div class="jumbotron">
-						<h2>Content</h2>
-						<p>Details</p>
-					</div>
-				</div>
-			</div>
-		</div>
+
+<!--END OF TOP HEADER-->
+
+
+<script id="shoe-template" type="x-handlebars-template">​
+   {{#each this}}​
+    <li class="shoes"><a href="/{{name}}">{{name}} -- Price: {{price}} </a></li>​
+    {{/each}}
+​</script> 
+
+
+
+
+
+<!--END OF BODY MAIN-->
+
+
 		<nav class="navbar navbar-default navbar-fixed-bottom">
 			<div class="container">
 				<div class="row">
@@ -82,6 +89,8 @@
 				</div>
 			</div>
 		</nav>
+
+<!--END OF FOOTER-->
 
 </body>
 
