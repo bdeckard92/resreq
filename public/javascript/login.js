@@ -25,7 +25,7 @@ $(document).ready(function () {
 
   var access_token = localStorage.getItem('access_token');
   // log user in, if there is a token
-  if (null != access_token) {
+  if (null !== access_token) {
     lock.getUserInfo(access_token, function (err, profile) {
       if (err) {
         // Remove expired token (if any) from localStorage
@@ -52,7 +52,7 @@ $(document).ready(function () {
   $('.btn-logout').click(function (e) {
     e.preventDefault();
     logout();
-  })
+  });
 
   lock.on("authenticated", function (authResult) {
     lock.getUserInfo(authResult.accessToken, function (error, profile) {
