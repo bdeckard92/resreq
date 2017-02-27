@@ -6,7 +6,7 @@ var db = require("../models");
 
 // Direct to home page
 router.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "../public/index-handlebars.html"));
+  res.sendFile(path.join(__dirname, "../public/index-hb.html"));
   // res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
