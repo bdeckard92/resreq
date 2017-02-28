@@ -45,31 +45,11 @@
 			</div>
 		</div>
 
-<!--end of top header-->
+		<!--end of top header-->
 
 		<div id="mainPageContent" class="container">
 			<div class="row">
-<script id="some-template" type="text/x-handlebars-template"> <table>
-    <thead> 
-        <th>Name</th> 
-        <th>Job Title</th> 
-        <th>Twitter</th> 
-    </thead> 
-    <tbody> 
-        {{#users}} 
-        <tr> 
-            <td>{{fullName person}}</td> 
-            <td>{{jobTitle}}</td> 
-            <td><a href="https://twitter.com/{{twitter}}">@{{twitter}}</a></td> 
-        </tr> 
-        {{/users}} 
-    </tbody> 
-</table> 
-</script>				
-				
-
 				<div class="col-md-12">
-
 					<ul class="nav nav-pills nav-justified">
 						<li role="presentation" class="active"><a href="./index.html">Home</a></li>
 						<li role="presentation"><a href="./menu.html">Menu</a></li>
@@ -80,18 +60,32 @@
 					</ul>
 				</div>
 			</div>
+
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Main Page</h1>
-					<div class="jumbotron">
-						<h2>Content</h2>
-						<p>Details</p>
-					</div>
+					<script id="some-template" type="text/x-handlebars-template">
+						<table>
+							<thead>
+								<th>Name</th>
+								<th>Job Title</th>
+								<th>Twitter</th>
+							</thead>
+							<tbody>
+								{{#users}}
+								<tr>
+									<td>{{fullName person}}</td>
+									<td>{{jobTitle}}</td>
+									<td><a href="https://twitter.com/{{twitter}}">@{{twitter}}</a></td>
+								</tr>
+								{{/users}}
+							</tbody>
+						</table>
+					</script>
 				</div>
 			</div>
 		</div>
 
-<!--end of main content-->
+		<!--end of main content-->
 
 		<nav class="navbar navbar-default navbar-fixed-bottom">
 			<div class="container">
