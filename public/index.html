@@ -30,6 +30,8 @@
 
 <body>
 	<script src='javascript/login.js'></script>
+	<!--link to handlebars-->
+	<script src='javascript/login-hb.js'></script>
 	<div class="container">
 
 		<div class="page-header">
@@ -49,6 +51,13 @@
 
 		<div id="mainPageContent" class="container">
 			<div class="row">
+				<script id="shoe-template" type="x-handlebars-template">​
+   {{#each this}}​
+   <ul class="shoesNav">
+    <li class="shoes"><a href="/{{name}}">{{name}} -- Price: {{price}} </a></li>​
+	</ul>​
+    {{/each}}
+​</script> 
 				<div class="col-md-12">
 
 					<ul class="nav nav-pills nav-justified">

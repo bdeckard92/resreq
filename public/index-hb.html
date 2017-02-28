@@ -24,7 +24,8 @@
 	<!--CDN for actual auth0 authentication-->
 	<script src="https://cdn.auth0.com/w2/auth0-7.6.1.min.js"></script>
 	<!-- Javascript Reference -->
-
+	<!--template engine-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.runtime.amd.min.js"></script>
 	
 
 </head>
@@ -66,7 +67,7 @@
 <!--END OF TOP HEADER-->
 
 
-<script id="shoe-template" type="x-handlebars-template">​
+<script id="shoe-template" type="text/x-handlebars-template">​
    {{#each this}}​
     <li class="shoes"><a href="/{{name}}">{{name}} -- Price: {{price}} </a></li>​
     {{/each}}
