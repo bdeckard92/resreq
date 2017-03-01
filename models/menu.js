@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-	var Start = sequelize.define("Start", {
+	var start = sequelize.define("start", {
 		Name: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -53,7 +53,7 @@ module.exports = function(sequelize, DataTypes) {
 		allowNull: false
 	}
 });
-	return Start;
+	return start;
 	return Entre;
 	return Dessert;
 };

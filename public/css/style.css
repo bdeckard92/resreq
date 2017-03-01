@@ -1,0 +1,6 @@
+.list-group-item > button.delete, .list-group-item > button.update {
+  float: right;
+  height: 25px;
+  line-height: .5;
+  margin-top: 3px;
+}
