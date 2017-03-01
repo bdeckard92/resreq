@@ -6,9 +6,7 @@
 	<title>Events</title>
 	<!-- Materialize CSS Reference -->
 	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">-->
-	<!-- Bootstrap: Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	    crossorigin="anonymous">
+
 	<!-- jQuery Reference -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
@@ -22,16 +20,27 @@
 	<!--CDN for actual auth0 authentication-->
 	<script src="https://cdn.auth0.com/w2/auth0-7.6.1.min.js"></script>
 	<!-- Javascript Reference -->
+		<!-- Bootstrap: Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	    crossorigin="anonymous">
+	<!--needed for bootstrap calendar-->
 	<link rel="stylesheet" href="css/calendar.css">
 
 
 </head>
 
 <body>
+	<!--link for auth0 code-->
 	<script src='javascript/login.js'></script>
+	<!--google calendar api code-->
 	<script src='javascript/format-google-calendar.js'></script>
-	<script src='javascript/events-calendar.js'></script>
 	<script src='https://apis.google.com/js/client.js?onload=handleClientLoad'></script>
+	<!--next 3 links are for bootstrap calendar-->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="javascript/base-calendar.js"></script>
+	<script type="text/javascript" src="javascript/app-calendar.js"></script>
+	<!--<script src='javascript/events-calendar.js'></script>-->
 
 	<div class="container">
 		<div class="page-header">
@@ -61,8 +70,33 @@
 
 
 		<div class="row">
-			<div id="calendar"></div>
+			<div id="calendarContainer" style="padding:5px;margin:5px;">
+				<div class="col-md-8">
+					<div id="calendar"></div>
+				</div>
+				<div class="col-md-4">
+					<div id="first_day"></div>
+					<div id="language"></div>
+					<div id="events-in-modal"></div>
+					<div id="first_day"></div>
+					<h4>Events</h4>
+					<ul id="eventList"></ul>
+				</div>
+			</div>
 
+
+
+			<div class="modal hide fade" id="events-modal">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3>Event</h3>
+				</div>
+				<div class="modal-body" style="height: 400px">
+				</div>
+				<div class="modal-footer">
+					<a href="#" data-dismiss="modal" class="btn">Close</a>
+				</div>
+			</div>
 			<!--<div id="calendar-area" class="col-md-12">
 				<ul id="events-upcoming">
 				</ul>
