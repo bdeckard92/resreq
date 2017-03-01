@@ -66,7 +66,7 @@ $(document).ready(function () {
       show_profile_info(profile);
       // Display page data
       $("#mainPageContent").show();
-      renderTable();
+      // renderTable();
     });
   });
 
@@ -122,7 +122,7 @@ $(document).ready(function () {
         // Display user information
         show_profile_info(profile);
         console.log(profile);
-        renderTable();
+        
       });
     }
   };
@@ -133,6 +133,7 @@ $(document).ready(function () {
     $('.btn-login').hide();
     $('.avatar').attr('src', profile.picture).show();
     $('.btn-logout').show();
+    renderTable();
   };
 
   var logout = function () {
@@ -146,40 +147,5 @@ $(document).ready(function () {
 
 
 
-function renderTable(){
-        var source = $("#some-template").html();
-    var template = Handlebars.compile(source);
-
-    var data = {
-        users: [{
-            person: {
-                firstName: "Garry",
-                lastName: "Finch"
-            },
-            jobTitle: "Front End Technical Lead",
-            twitter: "gazraa"
-        }, {
-            person: {
-                firstName: "Garry",
-                lastName: "Finch"
-            },
-            jobTitle: "Photographer",
-            twitter: "photobasics"
-        }, {
-            person: {
-                firstName: "Garry",
-                lastName: "Finch"
-            },
-            jobTitle: "LEGO Geek",
-            twitter: "minifigures"
-        }]
-    };
-
-    Handlebars.registerHelper('fullName', function (person) {
-        return person.firstName + " " + person.lastName;
-    });
-
-    $('body').append(template(data));
-}
 
 

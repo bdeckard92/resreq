@@ -9,6 +9,9 @@ router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/auth.html"));
 });
 
+router.get("/events", function (req, res) {
+  res.sendFile(path.join(__dirname, "../public/events.html"));
+});
 
 // Listen for burger owner
 router.post("/api/newUser", function (req, res) {

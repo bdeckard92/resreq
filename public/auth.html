@@ -29,9 +29,9 @@
 </head>
 
 <body>
-	<script src='javascript/login.js'></script>
-	<!--link to handlebars-->
+		<!--link to handlebars-->
 	<script src='javascript/login-hb.js'></script>
+	<script src='javascript/login.js'></script>
 	<div class="container">
 
 		<div class="page-header">
@@ -62,28 +62,28 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-12">
-					<script id="some-template" type="text/x-handlebars-template">
-						<table>
-							<thead>
-								<th>Name</th>
-								<th>Job Title</th>
-								<th>Twitter</th>
-							</thead>
-							<tbody>
-								{{#users}}
-								<tr>
-									<td>{{fullName person}}</td>
-									<td>{{jobTitle}}</td>
-									<td><a href="https://twitter.com/{{twitter}}">@{{twitter}}</a></td>
-								</tr>
-								{{/users}}
-							</tbody>
-						</table>
-					</script>
-				</div>
+				<script id="some-template" type="text/x-handlebars-template">
+					<table class="col-md-6 table table-striped">
+						<thead>
+							<th>Name</th>
+							<th>Job Title</th>
+							<th>Twitter</th>
+						</thead>
+						<tbody>
+							{{#users}}
+							<tr>
+								<td>{{fullName person}}</td>
+								<td>{{jobTitle}}</td>
+								<td><a href="https://twitter.com/{{twitter}}">@{{twitter}}</a></td>
+							</tr>
+							{{/users}}
+						</tbody>
+					</table>
+				</script>
+
 			</div>
 		</div>
+</div>
 
 		<!--end of main content-->
 
