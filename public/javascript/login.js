@@ -66,7 +66,6 @@ $(document).ready(function () {
       show_profile_info(profile);
       // Display page data
       $("#mainPageContent").show();
-      // renderTable();
     });
   });
 
@@ -133,7 +132,7 @@ $(document).ready(function () {
     $('.btn-login').hide();
     $('.avatar').attr('src', profile.picture).show();
     $('.btn-logout').show();
-    renderTable();
+    // renderTable();
   };
 
   var logout = function () {
