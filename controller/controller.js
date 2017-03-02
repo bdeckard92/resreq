@@ -38,8 +38,21 @@ router.post("/api/newUser", function (req, res) {
         });
       }
     });
+});
 
-
+router.post("/api/newEvent", function(req, res){
+    var eventObject = {
+      title: "random title here",
+      event_url: req.body.event_url,
+      event_start_time: req.body.event_start_time,
+      event_end_time: req.body.event_end_time,
+      owner_username: req.body.username,
+      owner_email: req.body.email
+    }
+    // db.events.create
+          db.events.create(eventObject).then(function (result) {
+          res.json("new event has been added");
+        });
 });
 
 

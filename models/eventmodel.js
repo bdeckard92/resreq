@@ -18,10 +18,16 @@ module.exports = function(sequelize, DataTypes){
             defaultValue: "event-success"
         },
         event_start_time: {
-            type: DataTypes.DATE
+            type: DataTypes.BIGINT
         },
         event_end_time: {
-            type: DataTypes.DATE
+            type: DataTypes.BIGINT
+        },
+        owner_username:{
+            type: DataTypes.STRING
+        },
+        owner_email: {
+            type: DataTypes.STRING
         }
     },
     {

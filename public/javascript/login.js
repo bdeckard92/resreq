@@ -1,8 +1,15 @@
+  var loggedInUser = {
+    username: "",
+    email: ""
+  };
 $(document).ready(function () {
   // hide logout button on initial load
   $('.btn-logout').hide();
   $('.avatar').hide();
   $("#mainPageContent").hide();
+
+  // global variable user info
+
 
   var options = {
     rememberLastLogin: true,
@@ -79,7 +86,7 @@ $(document).ready(function () {
       lastname: newUser.familyName,
     };
 
-
+    
     $.post(currentURL+"/api/newUser", newUserObject).then(function (data) {
                     console.log(data);
                     console.log("new user data sent");
@@ -132,6 +139,8 @@ $(document).ready(function () {
     $('.btn-login').hide();
     $('.avatar').attr('src', profile.picture).show();
     $('.btn-logout').show();
+    loggedInUser.username = profile.nickname;
+    loggedInUser.email = profile.email;
     // renderTable();
   };
 
