@@ -40,8 +40,11 @@ $(document).ready(function(){
 			list.html('');
 
 			$.each(events, function(key, val) {
-				$(document.createElement('li'))
-					.html('<a href="' + val.url + '">' + val.title + '</a>')
+				var newList = $("<li>");
+				newList.addClass("list-group-item");
+				// $(document.createElement('li'))
+
+					newList.html('<a href="' + val.url + '">' + val.title + '</a>')
 					.appendTo(list);
 			});
 		},
@@ -58,6 +61,8 @@ $(document).ready(function(){
 	};
 
 	var calendar = $('#calendar').calendar(options);
+
+	calendar.setOptions({modal: "#events-modal"});
 
 	$('.btn-group button[data-calendar-nav]').each(function() {
 		var $this = $(this);
@@ -88,6 +93,8 @@ $(document).ready(function(){
 	$('#events-in-modal').change(function(){
 		var val = $(this).is(':checked') ? $(this).val() : null;
 		calendar.setOptions({modal: val});
+		// calendar.setOptions({modal: "#events-modal"});
+		
 	});
 	$('#format-12-hours').change(function(){
 		var val = $(this).is(':checked') ? true : false;
@@ -107,6 +114,7 @@ $(document).ready(function(){
 	$('#events-modal .modal-header, #events-modal .modal-footer').click(function(e){
 		//e.preventDefault();
 		//e.stopPropagation();
+		
 	});
 
 });
