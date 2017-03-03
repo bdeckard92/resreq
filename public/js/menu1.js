@@ -10,6 +10,7 @@ $(document).ready(function() {
   $(document).on("click", "button.delete", deleteItem);
   $(document).on("click", "button.Update", updateItem);
   $(document).on("click", ".new-item", editTodo);
+  $(document).on("keyup", ".new-item", finishEdit);
 
 	// A function for handling what happens when the form to create a new apetizer is submitted
   function handleFormSubmit(event) {
@@ -44,6 +45,8 @@ $(document).ready(function() {
 
   // This function resets the items displayed with new items from the database
   function initializeRows() {
+    applist.empty();
+    $("#app")[0].reset();
     var appToAdd = [];
     for (var i = 0; i < app.length; i++) {
       appToAdd.push(createNewRow(app[i]));
@@ -55,6 +58,24 @@ $(document).ready(function() {
   function createNewRow(app) {
     var newInputRow = $("<li>");
     newInputRow.addClass("list-group-item new-item");
+    var newSpan = $("<span>");
+    newSpan.html(app.Name + "<br>" + app.Info + "<br>" + app.Price);
+    newInputRow.append(newSpan);
+    var newInput = $("<input>");
+    newInput.attr("type", "Name");
+    newInput.addClass("edit");
+    newInput.css("display", "none");
+    newInputRow.append(newInput);
+    var newInput2 = $("<input>");
+    newInput2.attr("type", "Info");
+    newInput2.addClass("edit2");
+    newInput2.css("display", "none");
+    newInputRow.append(newInput2);
+    var newInput3 = $("<input>");
+    newInput3.attr("type", "Price");
+    newInput3.addClass("edit3");
+    newInput3.css("display", "none");
+    newInputRow.append(newInput3);
     var newDeleteBtn = $("<button>");
     newDeleteBtn.addClass("delete btn btn-default");
     newDeleteBtn.text("Remove");
@@ -62,13 +83,12 @@ $(document).ready(function() {
     var newUpdateBtn = $("<button>");
     newUpdateBtn.addClass("update btn btn-default");
     newUpdateBtn.text("Update");
-    newInputRow.append(app.Name + "<br>" + app.Info + "<br>" + app.Price);
+    newUpdateBtn.data("id", app.id);
     newInputRow.append(newUpdateBtn);
     newInputRow.append(newDeleteBtn);
-    newInputRow.data("Start", app);
+    newInputRow.data("app", app);
     
     return newInputRow;
-    console.log(newInputRow);
   }
 
   // This function deletes a todo when the user clicks the delete button
@@ -79,7 +99,8 @@ $(document).ready(function() {
       url: "/api/menu/" + id
     })
     .done(function() {
-      //getStart();
+      applist.empty();
+      getStart();
     });
   }
 
@@ -97,19 +118,64 @@ $(document).ready(function() {
 
     // This function handles showing the input box for a user to edit a item
   function editTodo() {
-    var currentItem = $(this).data("Start");
+    var currentItem = $(this).data("app");
     $(this)
       .children()
       .hide();
     $(this)
       .children("input.edit")
-      .val(currentItem.text);
+      .val(currentItem.Name);
+    $(this)
+      .children("input.edit2")
+      .val(currentItem.Info);
+      $(this)
+      .children("input.edit3")
+      .val(currentItem.Price);
     $(this)
       .children("input.edit")
       .show();
     $(this)
+      .children("input.edit2")
+      .show();
+      $(this)
+      .children("input.edit3")
+      .show();
+    $(this)
       .children("input.edit")
       .focus();
+    $(this)
+      .children("input.edit2")
+      .focus();
+      $(this)
+      .children("input.edit3")
+      .focus();
+  }
+
+  // This function starts updating a item in the database if a user hits the
+  // "Enter Key" While in edit mode
+  function finishEdit(event) {
+    var updatedItem;
+    if (event.key === "Enter") {
+      updatedItem = {
+        id: $(this)
+          .data("app")
+          .id,
+        Name: $(this)
+          .children("input")
+          .val()
+          .trim(),
+        Info: $(this)
+          .children("input.edit2")
+          .val()
+          .trim(),
+        Price: $(this)
+          .children("input.edit3")
+          .val()
+      };
+      $(this).blur();
+      updateItem(updatedItem);
+      console.log(updatedItem);
+    }
   }
 
 
