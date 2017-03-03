@@ -1073,8 +1073,8 @@ if(!String.prototype.formatNum) {
 					frameborder: "0"
 				});
 		}
-
-		$('a[data-event-id]', this.context).on('click', function(event) {
+		// this.context
+		$('a[data-event-id]').on('click', function(event) {
 			event.preventDefault();
 			event.stopPropagation();
 

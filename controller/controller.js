@@ -13,6 +13,45 @@ router.get("/events", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/events.html"));
 });
 
+// return all events to calendar
+router.get("/api/getEvents", function(req, res){
+    db.events.findAll({}).then(function(result){
+      var eventsArray = [];
+      
+      for (var i = 0; i < result.length; i++) {
+				var singleEvent = {
+					"id": result[i].dataValues.event_id,
+					"title": result[i].dataValues.title,
+					// "url": result[i].dataValues.event_url,
+          "url": "/api/events/"+result[i].dataValues.event_id,
+					"class": result[i].dataValues.event_type, //event-special, event-information, event-success
+					"start": result[i].dataValues.event_start_time, // Milliseconds
+					"end": result[i].dataValues.event_end_time // Milliseconds
+				};
+				eventsArray.push(singleEvent);
+			}
+      var eventInfo = {
+        "success": 1,
+        "result": eventsArray
+      }
+
+
+      res.json(eventInfo);
+    });
+});
+
+router.get("/api/events/:eventID", function(req, res){
+  db.events.findOne({
+    where: {
+      event_id: req.params.eventID
+    }
+  }).then(function(result){
+
+    res.json("<h3>"+result.dataValues.title+"</h3>");
+  });
+});
+
+
 // Listen for burger owner
 router.post("/api/newUser", function (req, res) {
   // user's email will be unique
@@ -42,7 +81,7 @@ router.post("/api/newUser", function (req, res) {
 
 router.post("/api/newEvent", function(req, res){
     var eventObject = {
-      title: "random title here",
+      title: req.body.title,
       event_url: req.body.event_url,
       event_start_time: req.body.event_start_time,
       event_end_time: req.body.event_end_time,
