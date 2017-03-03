@@ -9,7 +9,7 @@ $(document).ready(function() {
 	$(document).on("submit", "#app", handleFormSubmit);
   $(document).on("click", "button.delete", deleteItem);
   $(document).on("click", "button.Update", updateItem);
-  $(document).on("click", ".new-item", editTodo);
+  $(document).one("click", ".new-item", editTodo);
   $(document).on("keyup", ".new-item", finishEdit);
 
 	// A function for handling what happens when the form to create a new apetizer is submitted
@@ -113,6 +113,7 @@ $(document).ready(function() {
     })
     .done(function() {
       getStart();
+      $(document).one("click", ".new-item", editTodo);
     });
   }
 
