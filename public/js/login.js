@@ -42,8 +42,6 @@ $(document).ready(function () {
     });
   }
 
-
-
   $('.btn-login').click(function (e) {
     e.preventDefault();
     lock.show();
@@ -65,12 +63,16 @@ $(document).ready(function () {
       // Display user information
       show_profile_info(profile);
       // Display page data
-      $("#mainPageContent").show();
+      //$("#mainPageContent").show();
       // renderTable();
+      window.location = "/select";
+      // $.get("/select", function (data) {
+      //   console.log(data);
+      // });
     });
   });
 
-  function sendUserDataDB(newUser){
+  function sendUserDataDB(newUser) {
     var currentURL = window.location.origin;
 
     var newUserObject = {
@@ -81,32 +83,31 @@ $(document).ready(function () {
     };
 
 
-    $.post(currentURL+"/api/newUser", newUserObject).then(function (data) {
-                    console.log(data);
-                    console.log("new user data sent");
+    $.post(currentURL + "/api/newUser", newUserObject).then(function (data) {
+      console.log(data);
+      console.log("new user data sent");
 
+    }, function (err) {
+      console.log(err);
+    });
+    // Alternate ajax post for testing
 
-                }, function (err) {
-                    console.log(err);
-                });
-// Alternate ajax post for testing
+    //     $.ajax({
+    //     url : "/api/newUser",
+    //     type: "POST",
+    //     dataType: "json",
+    //     data : JSON.stringify(newUserObject),
+    //     success: function(data, textStatus, jqXHR)
+    //     {
+    //         //data - response from server
+    //         console.log(data);
+    //         console.log("new user data sent");
+    //     },
+    //     error: function (jqXHR, textStatus, errorThrown)
+    //     {
 
-//     $.ajax({
-//     url : "/api/newUser",
-//     type: "POST",
-//     dataType: "json",
-//     data : JSON.stringify(newUserObject),
-//     success: function(data, textStatus, jqXHR)
-//     {
-//         //data - response from server
-//         console.log(data);
-//         console.log("new user data sent");
-//     },
-//     error: function (jqXHR, textStatus, errorThrown)
-//     {
-
-//     }
-// });
+    //     }
+    // });
 
 
   }
@@ -122,18 +123,20 @@ $(document).ready(function () {
         // Display user information
         show_profile_info(profile);
         console.log(profile);
-        
+
       });
     }
   };
 
   var show_profile_info = function (profile) {
-    $('.nickname').text(profile.nickname);
-    $('.nickname').show();
+    $('#nickname').text(profile.nickname);
+    $('#nickname').show();
     $('.btn-login').hide();
     $('.avatar').attr('src', profile.picture).show();
     $('.btn-logout').show();
-    renderTable();
+    // $.get("/select", function (data) {
+    //   console.log(data);
+    // });
   };
 
   var logout = function () {

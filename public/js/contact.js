@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // input references
     var res_name = $("#name");
+    var res_user = $("#nickname");
     var res_addr = $("#address");
     var res_phne = $("#phone");
     var res_hour = $("#hours");
@@ -8,12 +9,14 @@ $(document).ready(function () {
 
     $("#submit").on("click", function () {
         console.log(res_name.val());
+        console.log(res_user.text());
         console.log(res_addr.val());
         console.log(res_phne.val());
         console.log(res_hour.val());
         console.log(res_emil.val());
         var contact = {
             name: res_name.val(),
+            user_name: res_user.text(),
             address: res_addr.val(),
             phone: res_phne.val(),
             hour: res_hour.val(),

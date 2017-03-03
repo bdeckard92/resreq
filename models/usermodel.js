@@ -1,12 +1,5 @@
-
 module.exports = function(sequelize, DataTypes){
-    return sequelize.define("users", {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull: false,
-            autoIncrement: true
-        }, 
+    var users = sequelize.define("users", {
         first_name: {
             type: DataTypes.STRING
         },
@@ -29,7 +22,20 @@ module.exports = function(sequelize, DataTypes){
     },
     {
         timestamps: true
+    },
+        {
+      // We're saying that we want our Author to have Posts
+      classMethods: {
+        associate: function(models) {
+          // Associating Author with Posts
+          // When an Author is deleted, also delete any associated Posts
+          users.hasMany(models.restaurants, {
+            onDelete: "cascade"
+          });
+        }
+      }
     }); 
+    return users;
 
     
 };
