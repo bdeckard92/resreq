@@ -60,6 +60,7 @@ $(document).ready(function () {
       }
       sendUserDataDB(profile);
       localStorage.setItem('access_token', authResult.accessToken);
+      localStorage.setItem('userEmail', profile.email);
       // Display user information
       show_profile_info(profile);
       // Display page data

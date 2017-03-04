@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    // loginGlobal.init();
+    // var newEmail = loginGlobal.getProfile();
+    // console.log("email: " + newEmail);
+    console.log(localStorage.userEmail);
+
     // input references
     var res_name = $("#name");
     var res_user = $("#nickname");
@@ -6,6 +11,10 @@ $(document).ready(function () {
     var res_phne = $("#phone");
     var res_hour = $("#hours");
     var res_emil = $("#email");
+
+    var userEmail;
+
+
 
     $("#submit").on("click", function () {
         console.log(res_name.val());
@@ -22,7 +31,12 @@ $(document).ready(function () {
             hour: res_hour.val(),
             email: res_emil.val()
         };
+
+        // contact.userId = 1;
+
         console.log(contact);
+        $.get("/api/:email")
+
         $.post("/api/create", contact, function () {
             getContacts();
         });
@@ -35,10 +49,10 @@ $(document).ready(function () {
         });
     }
 
-    function createContact(contact){
+    function createContact(contact) {
         //var ul = $("<ul class='list-group'>");
         var li = $("<li class='list-group-item'>");
-        for(i in contact){
+        for (i in contact) {
             console.log(contact[i]);
             li.text(contact[i].address);
             $(".list-group").append(li);
