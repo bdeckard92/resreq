@@ -1,3 +1,5 @@
+var globalProfile;
+
 $(document).ready(function () {
   // hide logout button on initial load
   $('.btn-logout').hide();

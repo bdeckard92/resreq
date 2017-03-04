@@ -27,9 +27,10 @@ module.exports = function (sequelize, DataTypes) {
           // An Author (foreignKey) is required or a Post can't be made
           restaurants.belongsTo(models.users, {
             foreignKey: {
-              allowNull: false
+              allowNull: false          
             }
           });
+
         }
       }
     }
