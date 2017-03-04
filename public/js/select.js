@@ -6,6 +6,8 @@ $(document).ready(function () {
     var res_phne = $("#phone");
     var res_hour = $("#hours");
     var res_emil = $("#email");
+    var user_email = localStorage.user_email;
+
 
     $("#submit").on("click", function () {
         console.log(res_name.val());
@@ -14,17 +16,21 @@ $(document).ready(function () {
         console.log(res_phne.val());
         console.log(res_hour.val());
         console.log(res_emil.val());
-        var contact = {
-            name: res_name.val(),
-            user_name: res_user.text(),
-            address: res_addr.val(),
-            phone: res_phne.val(),
-            hour: res_hour.val(),
-            email: res_emil.val()
-        };
-        console.log(contact);
-        $.post("/api/create", contact, function () {
-            getContacts();
+        $.get("/api/user/" + user_email, function (data) {
+            console.log(data);
+            // var res_id = getUserId();
+            var restaurant = {
+                name: res_name.val(),
+                user_name: res_user.text(),
+                address: res_addr.val(),
+                phone: res_phne.val(),
+                hour: res_hour.val(),
+                email: res_emil.val(),
+                userId: data[0].id
+            };
+            $.post("/api/create", restaurant, function () {
+                getContacts();
+            });
         });
     });
 
@@ -35,13 +41,13 @@ $(document).ready(function () {
         });
     }
 
-    function createContact(contact){
+    function createContact(contact) {
         //var ul = $("<ul class='list-group'>");
         var li = $("<li class='list-group-item'>");
-        for(i in contact){
+        for (i in contact) {
             console.log(contact[i]);
-            li.text(contact[i].address);
-            $(".list-group").append(li);
+            li.text(contact[i].name);
+            $("#restaurant-info").append(li);
         }
 
     }

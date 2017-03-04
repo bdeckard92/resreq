@@ -60,11 +60,13 @@ $(document).ready(function () {
       }
       sendUserDataDB(profile);
       localStorage.setItem('access_token', authResult.accessToken);
+      localStorage.setItem('user_email', profile.email);
       // Display user information
       show_profile_info(profile);
       // Display page data
       //$("#mainPageContent").show();
       // renderTable();
+      //console.log(profile);
       window.location = "/select";
       // $.get("/select", function (data) {
       //   console.log(data);

@@ -38,7 +38,19 @@ module.exports = function (app) {
 
     // API ROUTES
     app.get("/api/get", function (req, res) {
-        db.restaurants.findAll({}).then(function (data) {
+        db.restaurants.findAll({
+            include: [db.users]
+        }).then(function (data) {
+            res.json(data);
+        });
+    });
+    app.get("/api/user/:user_email", function (req, res) {
+        var email = req.params.user_email;
+        db.users.findAll({
+            where: {
+                email: email
+            },
+        }).then(function (data) {
             res.json(data);
         });
     });
@@ -64,6 +76,7 @@ module.exports = function (app) {
 
         // check if the e-mail exists, add the user if no email
         db.users.findAll({
+            // include: [db.users],
             where: {
                 email: checkEmail
             }
@@ -75,11 +88,6 @@ module.exports = function (app) {
                     });
                 }
 
-            })
-            .then(function (result) {
-                res.render("index-select", { title: "Admin Selection Page", layout: "main-select.hbs", condition: false });
             });
-
-
     });
 };
