@@ -3,14 +3,22 @@ $(document).ready(function() {
 	var appNameInput = $("#apetizer");
 	var appInfoInput = $("#appDesc");
 	var appPriceInput = $("#appPrice");
+  var appCateInput = $("#category")
   var applist = $(".applist");
   var app;
   // Adding an event listener for when the form is submitted
 	$(document).on("submit", "#app", handleFormSubmit);
   $(document).on("click", "button.delete", deleteItem);
-  $(document).on("click", "button.Update", updateItem);
+  //$(document).on("click", "button.Update", updateItem);
   $(document).one("click", ".new-item", editTodo);
   $(document).on("keyup", ".new-item", finishEdit);
+  //$("#save").on('click', function(){
+    //finishEdit();
+ // })
+
+  $("#menu").on('click', function(){
+    getStart();
+  });
 
 	// A function for handling what happens when the form to create a new apetizer is submitted
   function handleFormSubmit(event) {
@@ -25,7 +33,8 @@ $(document).ready(function() {
         .val(),
       Info: appInfoInput
         .val(),
-      Price: appPriceInput.val()
+      Price: appPriceInput.val(),
+      Category: appCateInput.val()
     };
     console.log(start);
     $.post("/api/menu", start, function() {
@@ -59,7 +68,7 @@ $(document).ready(function() {
     var newInputRow = $("<li>");
     newInputRow.addClass("list-group-item new-item");
     var newSpan = $("<span>");
-    newSpan.html(app.Name + "<br>" + app.Info + "<br>" + app.Price);
+    newSpan.html(app.Name+"<br>"+app.Info+"<br>"+app.Price+"<br>"+app.Category);
     newInputRow.append(newSpan);
     var newInput = $("<input>");
     newInput.attr("type", "Name");
@@ -76,15 +85,20 @@ $(document).ready(function() {
     newInput3.addClass("edit3");
     newInput3.css("display", "none");
     newInputRow.append(newInput3);
+    var newInput4 = $("<input>");
+    newInput4.attr("type", "Category");
+    newInput4.addClass("edit4");
+    newInput4.css("display", "none");
+    newInputRow.append(newInput4);
     var newDeleteBtn = $("<button>");
     newDeleteBtn.addClass("delete btn btn-default");
     newDeleteBtn.text("Remove");
     newDeleteBtn.data("id", app.id);
-    var newUpdateBtn = $("<button>");
-    newUpdateBtn.addClass("update btn btn-default");
-    newUpdateBtn.text("Update");
-    newUpdateBtn.data("id", app.id);
-    newInputRow.append(newUpdateBtn);
+    // var newUpdateBtn = $("<button>");
+    // newUpdateBtn.addClass("update btn btn-default");
+    // newUpdateBtn.text("Update");
+    // newUpdateBtn.data("id", app.id);
+    //newInputRow.append(newUpdateBtn);
     newInputRow.append(newDeleteBtn);
     newInputRow.data("app", app);
     
@@ -129,17 +143,23 @@ $(document).ready(function() {
     $(this)
       .children("input.edit2")
       .val(currentItem.Info);
-      $(this)
+    $(this)
       .children("input.edit3")
       .val(currentItem.Price);
     $(this)
+      .children("input.edit4")
+      .val(currentItem.Category);
+    $(this)
       .children("input.edit")
       .show();
     $(this)
       .children("input.edit2")
       .show();
-      $(this)
+    $(this)
       .children("input.edit3")
+      .show();
+    $(this)
+      .children("input.edit4")
       .show();
     $(this)
       .children("input.edit")
@@ -147,8 +167,11 @@ $(document).ready(function() {
     $(this)
       .children("input.edit2")
       .focus();
-      $(this)
+    $(this)
       .children("input.edit3")
+      .focus();
+    $(this)
+      .children("input.edit4")
       .focus();
   }
 
@@ -171,6 +194,9 @@ $(document).ready(function() {
           .trim(),
         Price: $(this)
           .children("input.edit3")
+          .val(),
+        Category: $(this)
+          .children("input.edit4")
           .val()
       };
       $(this).blur();

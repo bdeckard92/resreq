@@ -13,7 +13,8 @@ module.exports = function(app) {
     db.start.create({
       Name: req.body.Name,
       Info: req.body.Info,
-      Price: req.body.Price
+      Price: req.body.Price,
+      Category: req.body.Category
     }).then(function(dbstart) {
       // We have access to the new appetizer as an argument inside of the callback function
       res.json(dbstart);
@@ -50,7 +51,8 @@ module.exports = function(app) {
     db.start.update({
       Name: req.body.Name,
       Info: req.body.Info,
-      Price: req.body.Price
+      Price: req.body.Price,
+      Category: req.body.Category
     }, {
       where: {
         id: req.body.id
