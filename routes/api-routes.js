@@ -44,12 +44,8 @@ module.exports = function (app) {
     });
     app.post("/api/create", function (req, res) {
         console.log(req.body);
-        var newRest = req.body;
-
-        newRest.userId = 1;
-
         db.restaurants.create(
-            newRest
+            req.body
         ).then(function (data) {
             res.json(data);
         })
@@ -75,10 +71,7 @@ module.exports = function (app) {
             .then(function (result) {
                 if (result.length === 0) {
                     db.users.create(userObject).then(function (result) {
-                        
-                        // only for testing below, uncommenting will cause an error
-                        // if you res.json, you finish the response, so you cannot res.render in the next function
-                        // res.json("new user has been added");
+                        res.json("new user has been added");
                     });
                 }
 

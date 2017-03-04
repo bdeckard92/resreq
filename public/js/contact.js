@@ -5,17 +5,7 @@ $(document).ready(function () {
     var res_addr = $("#address");
     var res_phne = $("#phone");
     var res_hour = $("#hours");
-    var res_emil = $("#email"); 
-
-var lock = new Auth0Lock('w0afrsXkjEvuLPkJAmX7iI3GhWDVKTFB', 'bchang55.auth0.com', options, {
-    auth: {
-      params: {
-        scope: 'openid name email'
-      } //Details: https://auth0.com/docs/scopes
-    }
-  });  
-
-
+    var res_emil = $("#email");
 
     $("#submit").on("click", function () {
         console.log(res_name.val());
@@ -57,69 +47,3 @@ var lock = new Auth0Lock('w0afrsXkjEvuLPkJAmX7iI3GhWDVKTFB', 'bchang55.auth0.com
     }
     getContacts();
 });
-
-
-
-
-
-function sendUserDataDB(newUser) {
-    var currentURL = window.location.origin;
-
-    var newUserObject = {
-      email: newUser.email,
-      username: newUser.nickname,
-      firstname: newUser.givenName,
-      lastname: newUser.familyName,
-    };
-
-
-    $.post(currentURL + "/api/newUser", newUserObject).then(function (data) {
-      console.log(data);
-      console.log("new user data sent");
-
-    }, function (err) {
-      console.log(err);
-    });
-    // Alternate ajax post for testing
-
-    //     $.ajax({
-    //     url : "/api/newUser",
-    //     type: "POST",
-    //     dataType: "json",
-    //     data : JSON.stringify(newUserObject),
-    //     success: function(data, textStatus, jqXHR)
-    //     {
-    //         //data - response from server
-    //         console.log(data);
-    //         console.log("new user data sent");
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown)
-    //     {
-
-    //     }
-    // });
-
-
-  }
-
-      lock.getUserInfo(authResult.accessToken, function (error, profile) {
-                  if (error) {
-                      // Handle error
-                      return;
-                  }
-                  var newUserObject = {
-                        email: profile.email,
-                        username: profile.nickname,
-                        firstname: profile.givenName,
-                        lastname: profile.familyName,
-                        };
-
-
-                        $.post(currentURL + "/api/newUser", newUserObject).then(function (data) {
-                        console.log(data);
-                        console.log("new user data sent");
-
-                        }, function (err) {
-                        console.log(err);
-                        });
-      });
