@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-3">
+                <div>
+                    <form id="reservation-form">
+                        <input class="name new-item" placeholder="First and Last Name" id="res_name" type="text" />
+                </div>
+                <br>
+                <div>
+                    <input class="phone new-item" placeholder="Enter Phone Number" id="res_phone" type="text" />
+                </div>
+                <br>
+                <div>
+                    <input class="email new-item" placeholder="Enter Email" id="res_email" type="text" />
+                </div>
+                <br>
+                <div>
+                    <input type="text" id="datetime12 res_date" data-format="DD-MM-YYYY h:mm a" data-template="YYYY / MM / DD     hh : mm : ss" name="datetime" value="2017-03-03 8:30:25">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-default" id="submit">Add Reservation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Custom Script -->
+    <script src="js/view.js" type="text/javascript"></script>
+    
+</body>
+
+</html>
