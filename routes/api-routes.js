@@ -71,7 +71,9 @@ module.exports = function (app) {
             .then(function (result) {
                 if (result.length === 0) {
                     db.users.create(userObject).then(function (result) {
-                        res.json("new user has been added");
+
+                        // for testing. you cannot render handlebars after res.json. 
+                        // res.json("new user has been added");
                     });
                 }
 
