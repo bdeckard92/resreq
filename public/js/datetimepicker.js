@@ -37,7 +37,7 @@ $(document).ready(function(){
             //data - response from server
             console.log(data);
             console.log("new event data received");
-            window.location = '/events';
+            window.location = '/admin/events';
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
