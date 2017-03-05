@@ -31,7 +31,7 @@ $(document).ready(function () {
 		// 	}
 		// ],
 		view: 'month',
-		tmpl_path: 'tmpls/',
+		tmpl_path: '../tmpls/',
 		tmpl_cache: false,
 		day: calendarStartDate,
 		onAfterEventsLoad: function (events) {
