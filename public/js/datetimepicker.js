@@ -22,13 +22,13 @@ $(document).ready(function(){
             event_url: "http://someurl.com",
             event_start_time: msStart,
             event_end_time: msEnd,
-            username: loggedInUser.username,
-            email: loggedInUser.email
+            // username: loggedInUser.username,
+            email: localStorage.userEmail
         };
 
 
         $.ajax({
-        url : "api/newEvent",
+        url : "/api/newEvent",
         type: "POST",
         dataType: "json",
         data : newEventObject,
