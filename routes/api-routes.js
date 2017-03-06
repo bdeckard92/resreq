@@ -136,14 +136,16 @@ module.exports = function (app) {
 
     // Display Event Modal - Listener
 
-    app.get("/api/events/:eventID", function(req, res){
+app.get("/api/events/:eventID", function(req, res){
   db.events.findOne({
     where: {
       event_id: req.params.eventID
     }
   }).then(function(result){
-
-    res.json("<h3>"+result.dataValues.title+"</h3>");
+    // hbs.registerPartial('events-modal', '{{eModal}}');
+    // res.json("<h3>"+result.dataValues.title+"</h3>");
+    // res.render("eModal", result);
+    
   });
 });
 

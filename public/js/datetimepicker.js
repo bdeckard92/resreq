@@ -23,7 +23,7 @@ $(document).ready(function(){
             event_start_time: msStart,
             event_end_time: msEnd,
             // username: loggedInUser.username,
-            email: localStorage.userEmail
+            email: localStorage.user_email
         };
 
 

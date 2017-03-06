@@ -5,6 +5,7 @@ var path = require("path");
 var db = require("./models");
 var hbs = require("express-handlebars");
 
+
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -23,12 +24,14 @@ app.use(express.static("./public"));
 app.engine("hbs", hbs({extname: "hbs", defaultLayout: "main", layoutsDir: __dirname + "/views/layouts" }));
 app.set("view engine", "hbs");
 
+
 // Routes =============================================================
 require("./routes/api-routes.js")(app);
 //require("./routes/html-routes.js")(app);
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync({ force: true }).then(function() {
+// { force: true }
+db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
