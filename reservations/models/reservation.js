@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     phone: DataTypes.STRING,
     email: DataTypes.STRING,
-    date: DataTypes.DATE
+    date: DataTypes.STRING
   });
   return Reservation;
 };

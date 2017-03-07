@@ -17,7 +17,7 @@ $(document).ready(function() {
             function(data) {
                 // If a table is available... tell user they are booked.
                 if (data) {
-                    alert("Yay! You are officially booked!");
+                    alert("You are booked");
                 }
                 // If a table is available... tell user they on the waiting list.
                 else {
@@ -35,7 +35,7 @@ $(document).ready(function() {
   var newName = $("#res_name");
   var newPhone = $("#res_phone");
   var newEmail= $("#res_email");
-  var newDate = $("#res_date");
+  var newDate = $("#res_date");*/
   // Our new reservation will go inside the reservationContainer
   var reservationContainer = $(".reservation-container");
   // Adding event listeners for deleting, editing, and adding reservations
@@ -43,8 +43,8 @@ $(document).ready(function() {
   
   $(document).on("click", ".reservation-item", editReservation);
   //$(document).on("keyup", ".reservation-item", finishEdit);
-  $(document).on("blur", ".reservation-item", cancelEdit);
-  $(document).on("submit", ".submit", insertReservation);
+  /*$(document).on("blur", ".reservation-item", cancelEdit);
+  $(document).on("submit", ".submit", insertReservation);*/
 
   // Our initial reservation array above part would be rendered for the admin
   var reservations;
@@ -189,5 +189,5 @@ $(document).ready(function() {
     });
     newItemInput.val("");
   }
-*/
+
 });
