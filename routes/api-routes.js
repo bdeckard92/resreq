@@ -15,31 +15,38 @@ module.exports = function (app) {
     });
 
     // SELECT ROUTES
-    app.get("/select", function (req, res) {
-        res.render("index-select", { title: "Admin Selection Page", layout: "main-select.hbs", condition: false });
+    app.get("/:id/select", function (req, res) {
+        res.render("select-index", { title: "Restaurant Selection Page", layout: "main-select.hbs", condition: false });
     });
 
     // ADMIN ROUTES
-    app.get("/admin/menu", function (req, res) {
-        res.render("menu-admin", { title: "Admin Menu Page", layout: "main-admin.hbs", condition: false });
+    app.get("/:id", function (req, res) {
+        res.render("admin-index", { title: "Admin Main Page", layout: "main-admin.hbs", condition: false });
     });
-    app.get("/admin/reserve", function (req, res) {
-        res.render("reserve-admin", { title: "Admin Reservation Page", layout: "main-admin.hbs", condition: false });
+    app.get("/:id/menu", function (req, res) {
+        res.render("admin-menu", { title: "Admin Menu Page", layout: "main-admin.hbs", condition: false });
     });
-    app.get("/admin/events", function (req, res) {
-        res.render("events-admin"), { title: "Admin Events Page", layout: "main-admin.hbs", condition: false };
+    app.get("/:id/reserve", function (req, res) {
+        res.render("admin-reserve", { title: "Admin Reservation Page", layout: "main-admin.hbs", condition: false });
     });
-    app.get("/admin/reviews", function (req, res) {
-        res.render("reviews-admin", { title: "Admin Reviews Page", layout: "main-admin.hbs", condition: false });
+    app.get("/:id/event", function (req, res) {
+        res.render("admin-event"), { title: "Admin Events Page", layout: "main-admin.hbs", condition: false };
     });
-    app.get("/admin/contact", function (req, res) {
-        res.render("contact-admin", { title: "Admin Contact Page", layout: "main-admin.hbs", condition: true });
+    app.get("/:id/review", function (req, res) {
+        res.render("admin-review", { title: "Admin Reviews Page", layout: "main-admin.hbs", condition: false });
+    });
+    app.get("/:id/contact", function (req, res) {
+        res.render("admin-contact", { title: "Admin Contact Page", layout: "main-admin.hbs", condition: true });
     });
 
     // API ROUTES
-    app.get("/api/get", function (req, res) {
+    app.get("/api/get/:userId", function (req, res) {
+        var userId = req.params.userId;
         db.restaurants.findAll({
-            include: [db.users]
+            include: [db.users],
+            where: {
+                userId: userId
+            }
         }).then(function (data) {
             res.json(data);
         });
@@ -86,6 +93,9 @@ module.exports = function (app) {
                     db.users.create(userObject).then(function (result) {
                         res.json("new user has been added");
                     });
+                }
+                else{
+                    res.json(result);
                 }
 
             });

@@ -10,7 +10,6 @@ $(document).ready(function () {
       redirect: false
     },
     autoclose: true
-
   };
 
   var lock = new Auth0Lock('w0afrsXkjEvuLPkJAmX7iI3GhWDVKTFB', 'bchang55.auth0.com', options, {
@@ -38,6 +37,7 @@ $(document).ready(function () {
         show_profile_info(profile);
         $("#mainPageContent").show();
         console.log("user authenticated");
+        localStorage.setItem("login", profile.identities["0"].userId);
       }
     });
   }
@@ -52,6 +52,10 @@ $(document).ready(function () {
     logout();
   });
 
+  $(document.body).on("click", "#btn-select", function () {
+    window.location = "/" + localStorage.login + "/select";
+  })
+
   lock.on("authenticated", function (authResult) {
     lock.getUserInfo(authResult.accessToken, function (error, profile) {
       if (error) {
@@ -61,57 +65,28 @@ $(document).ready(function () {
       sendUserDataDB(profile);
       localStorage.setItem('access_token', authResult.accessToken);
       localStorage.setItem('user_email', profile.email);
+      localStorage.setItem("login", profile.identities["0"].userId);
       // Display user information
       show_profile_info(profile);
-      // Display page data
-      //$("#mainPageContent").show();
-      // renderTable();
-      //console.log(profile);
-      window.location = "/select";
-      // $.get("/select", function (data) {
-      //   console.log(data);
-      // });
+      // route to the selection page
+      window.location = "/" + localStorage.login + "/select";
     });
   });
 
   function sendUserDataDB(newUser) {
     var currentURL = window.location.origin;
-
     var newUserObject = {
       email: newUser.email,
       username: newUser.nickname,
       firstname: newUser.givenName,
       lastname: newUser.familyName,
     };
-
-
     $.post(currentURL + "/api/newUser", newUserObject).then(function (data) {
       console.log(data);
       console.log("new user data sent");
-
     }, function (err) {
       console.log(err);
     });
-    // Alternate ajax post for testing
-
-    //     $.ajax({
-    //     url : "/api/newUser",
-    //     type: "POST",
-    //     dataType: "json",
-    //     data : JSON.stringify(newUserObject),
-    //     success: function(data, textStatus, jqXHR)
-    //     {
-    //         //data - response from server
-    //         console.log(data);
-    //         console.log("new user data sent");
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown)
-    //     {
-
-    //     }
-    // });
-
-
   }
 
   //retrieve the profile:
@@ -125,7 +100,6 @@ $(document).ready(function () {
         // Display user information
         show_profile_info(profile);
         console.log(profile);
-
       });
     }
   };
@@ -146,7 +120,6 @@ $(document).ready(function () {
     window.location.href = "/";
     $("#mainPageContent").hide();
   };
-
   retrieve_profile();
 });
 
