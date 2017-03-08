@@ -145,6 +145,7 @@ app.get("/api/events/:eventID", function(req, res){
     // hbs.registerPartial('events-modal', '{{eModal}}');
     // res.json("<h3>"+result.dataValues.title+"</h3>");
     // res.render("eModal", result);
+    res.json(result);
     
   });
 });

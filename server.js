@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var path = require("path");
 var db = require("./models");
 var hbs = require("express-handlebars");
+var fs = require("fs");
 
 
 // Sets up the Express App
@@ -23,6 +24,7 @@ app.use(express.static("./public"));
 // Set Handlebars.
 app.engine("hbs", hbs({extname: "hbs", defaultLayout: "main", layoutsDir: __dirname + "/views/layouts" }));
 app.set("view engine", "hbs");
+
 
 
 // Routes =============================================================

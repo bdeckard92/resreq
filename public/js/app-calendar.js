@@ -1,4 +1,3 @@
-var eventsArray = [];
 $(document).ready(function () {
 
 	"use strict";
@@ -9,7 +8,40 @@ $(document).ready(function () {
 	var calendarStartDate = tempYear + "-" + tempMonth + "-" + tempDay;
 	// 2017-03-18
 
-	
+	$(document).on("click", ".event-item", function (e) {
+		// console.log($(this).data("eventid"));
+		// var name = 'show';
+      	
+      	
+		var listid = $(this).data("eventid");
+
+		// console.log(e);
+		$.ajax({
+			url: "/api/events/" + listid,
+			type: "GET",
+			dataType: "json",
+			// data: newEventObject,
+			success: function (data, textStatus, jqXHR) {
+				//data - response from server	
+				// display_template('events/events-modal', data);	
+				var dayStart = moment(data.event_start_time);		
+				var dayEnd = moment(data.event_end_time);
+				
+				$("#modalHeader").text(data.title);
+				$("#eStart").text(dayStart._d);
+				$("#eEnd").text(dayEnd._d);
+				$("#events-modal").modal('toggle');
+
+
+
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+
+			}
+		});
+	});
+
+
 	var options = {
 		events_source: '/api/getEvents',
 		// for event source, make a GET to server and return events
@@ -43,13 +75,16 @@ $(document).ready(function () {
 
 			$.each(events, function (key, val) {
 				var newList = $("<li>");
+
+				newList.attr('data-eventid', val.id);
 				newList.addClass("list-group-item event-item");
-				// $(document.createElement('li'))
-				newList.data("event-id", val.id);
-				
-				// newList.html('<a href="' + val.url + '">' + val.title + '</a>')
-				newList.html('<a data-event-id="' + val.id +'" ' + 'href="' + val.url + '">' + val.title + '</a>')
+
+				newList.text(val.title)
+					// newList.html('<a data-event-id="' + val.id +'" ' + 'href="' + val.url + '">' + val.title + '</a>')
+
 					.appendTo(list);
+
+
 			});
 		},
 		onAfterViewLoad: function (view) {
@@ -70,7 +105,9 @@ $(document).ready(function () {
 		modal: "#events-modal"
 	});
 	// always open as modal
-	calendar.setOptions({modal: "#events-modal"});
+	calendar.setOptions({
+		modal: "#events-modal"
+	});
 
 	$('.btn-group button[data-calendar-nav]').each(function () {
 		var $this = $(this);
@@ -136,3 +173,23 @@ $(document).ready(function () {
 	});
 
 });
+
+var templates = {};
+ 
+function display_template(tmpl, data) {
+    console.log('display');
+ 
+    if (templates[tmpl] === undefined) {
+      console.log("need");
+      jQuery.get("/try/examples/js/handlebars_template_" + tmpl + ".htm", function(resp) {
+          console.log(resp);
+          templates[tmpl] = Handlebars.compile(resp);
+          display_template(tmpl, data);
+      });
+      return;
+    }
+ 
+    var template = templates[tmpl];
+    var html    = template(data);
+   $("#msg").html(html);
+}

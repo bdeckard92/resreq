@@ -72,19 +72,24 @@
 			</div>
 
 			<div class="modal fade" id="events-modal">
-				{{> events/events-modal}}
-				{{!--<div class="modal-dialog">
+				{{!--{{> events/events-modal }}--}}
+				{{!--{{> (lookup . 'events/events-modal')}}--}}
+				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3>Event</h3>
+							<h3 id="modalHeader"></h3>
 						</div>
 						<div class="modal-body" style="height: 400px">
+							<h4>Start Time: </h4>
+							<p><span id="eStart"></span></p>
+							<h4>End Time: </h4>
+							<p><span id="eEnd"></span></p>
 						</div>
 						<div class="modal-footer">
 							<a href="#" data-dismiss="modal" class="btn">Close</a>
 						</div>
 					</div>
-				</div>--}}
+				</div>
 			</div>
 		
