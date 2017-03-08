@@ -1,9 +1,20 @@
+<link rel="stylesheet" href="/css/star-rating.css">
+<script src="/js/star-rating.js" ></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".input-star").rating();
+});
+	
+</script>
+
 <div class="row">
 	<div class="col-md-12">
-		<h1>Admin Reviews Page</h1>
+		<h1>Your Reviews</h1>
 		<div class="jumbotron">
 			<h2>Content</h2>
 			<p>Details</p>
+			<p><input id="input-id" type="text" class="rating input-star" data-size="xs"></p>
 		</div>
 	</div>
 </div>

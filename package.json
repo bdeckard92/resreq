@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/bdeckard92/resreq#readme",
   "dependencies": {
+    "bootstrap-star-rating": "^4.0.2",
     "sequelize": "^3.30.2"
   }
 }
