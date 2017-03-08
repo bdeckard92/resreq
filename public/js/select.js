@@ -85,7 +85,7 @@ $(document).ready(function () {
             var btn = $('<a class="btn btn-default btn-route" role="button">');
             console.log(req[i]);
             btn.text(req[i].name);
-            btn.attr('restaurant-id', '/' + req[i].id);
+            btn.attr('restaurant-id', req[i].id);
             li.append(btn);
             ul.append(li);
         }
@@ -97,7 +97,7 @@ $(document).ready(function () {
         // save admin id from button clicked in the localStorage
         localStorage.setItem('resId', resId);
         // then direct to the admin page specified by the resId
-        window.location = resId;
+        window.location = "/" + resId;
     });
 
     // initialize by getting the userId
