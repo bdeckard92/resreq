@@ -1,16 +1,16 @@
 @font-face {
     font-family: Gotham-md;
-    src: url(assets/font/gotham-medium.ttf);
+    src: url(/font/gotham-medium.ttf);
 }
-@font-face {
-    font-family: Gotham-lt;
-    src: url(assets/font/gotham-light.ttf);
-}
-
 @font-face {
     font-family: Gotham-rg;
-    src: url(assets/font/gotham-regular.ttf);
+    src: url(/font/gotham-light.ttf);
 }
+
+/*@font-face {
+    font-family: Gotham-rg;
+    src: url(/font/gotham-regular.ttf);
+}*/
 
 #main {
     margin-bottom: 20px;
