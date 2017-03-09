@@ -188,4 +188,57 @@ module.exports = function (app) {
         });
     });
 
+    //---------- EVENT ROUTES ----------//
+    // add new event to calendar
+    app.post("/api/newEvent", function (req, res) {
+
+        // db.events.create
+        db.events.create(req.body).then(function (result) {
+            res.json("new event has been added");
+        });
+    });
+
+    // return all events to calendar
+    app.get("/api/getEvents/:resId", function (req, res) {
+        var resId = req.params.resId;
+        db.events.findAll({
+            include: [db.restaurants],
+            where: {
+                restaurantId: resId
+            }
+        }).then(function (result) {
+            var eventsArray = [];
+
+            for (var i = 0; i < result.length; i++) {
+                var singleEvent = {
+                    "id": result[i].dataValues.event_id,
+                    "title": result[i].dataValues.title,
+                    // "url": result[i].dataValues.event_url,
+                    "url": "/api/events/" + result[i].dataValues.event_id,
+                    "class": result[i].dataValues.event_type, //event-special, event-information, event-success
+                    "start": result[i].dataValues.event_start_time, // Milliseconds
+                    "end": result[i].dataValues.event_end_time // Milliseconds
+                };
+                eventsArray.push(singleEvent);
+            }
+            var eventInfo = {
+                "success": 1,
+                "result": eventsArray
+            }
+
+            res.json(eventInfo);
+        });
+    });
+
+    // Display Event Modal - Listener
+    app.get("/api/events/:eventID", function (req, res) {
+        db.events.findOne({
+            where: {
+                event_id: req.params.eventID
+            }
+        }).then(function (result) {
+            res.json(result);
+        });
+    });
+
 };
