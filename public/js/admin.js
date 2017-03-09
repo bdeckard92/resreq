@@ -1,7 +1,8 @@
 
 //var resId = localStorage.resId;
 var str = window.location.pathname;
-var resId = str[1];
+localStorage.setItem("resId", str[1]);
+var resId = localStorage.resId;
 
 // create the admin navigation
 var ul = $("<ul class='nav nav-pills nav-justified'>");
