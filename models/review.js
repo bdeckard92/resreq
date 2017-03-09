@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
             len: [1]
         },
         rate: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10,2),
             allowNull: false
         }
     },

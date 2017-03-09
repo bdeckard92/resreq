@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    // Load all existing reviews on page load
     loadReviews();
 
     $("#reviewSubmit").on("click", function(e){
@@ -33,18 +33,9 @@ $(document).ready(function(){
                      $("#reviewerName").val("");
                      $("#reviewRating").val("");
                      $("#reviewComments").val("");
+                     loadReviews();
                  });
     });
-
-
-
-
-
-
-
-
-
-
 
 // DO NOT DELETE - needed for star rating functionality
         $(".loadedReview").rating({displayOnly: true});
@@ -66,6 +57,8 @@ $(document).ready(function(){
 });
 
 function loadReviews(){
+    // clear reviews area before loaidng all reviews
+    $("#reviewsArea").html("");
                  $.ajax({
                      url: "/api/review/"+localStorage.resId,
                      type: "GET",
