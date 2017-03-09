@@ -69,7 +69,7 @@ $(document).ready(function () {
       // Display user information
       show_profile_info(profile);
       // route to the selection page
-      window.location = "/" + localStorage.login + "/select";
+      //window.location = "/" + localStorage.login + "/select";
     });
   });
 
