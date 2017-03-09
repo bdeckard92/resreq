@@ -61,6 +61,7 @@ $(document).ready(function () {
 
     // get userId by login email
     function getUserId() {
+        $("#restaurant-info").html("");
         $.get("/api/user/" + user_email, function (data) {
             // save userId in the localStorage
             console.log(data);
@@ -79,6 +80,7 @@ $(document).ready(function () {
 
     // create the list of restaurants
     function createRes(req) {
+        
         var ul = $("<ul class='list-group'>");
         for (i in req) {
             var li = $("<li class='list-group-item'>");
