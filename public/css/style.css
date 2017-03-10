@@ -92,8 +92,7 @@ p{
 }
 
 .btn-default:hover{
-        color: #000000;
-    border-radius: 0;
+        color: #000000;    
      border:none;
 
 }
