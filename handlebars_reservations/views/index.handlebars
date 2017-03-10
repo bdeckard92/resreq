@@ -1,0 +1,18 @@
+
+<h1>Create Your Reservation</h1>
+<form method="POST" action="/create">
+	<textarea type="text" name= "name"></textarea>
+	<textarea type="text" name="phone"></textarea>
+	<textarea type= "text" name="email"></textarea>
+	<textarea type= "text" name = "date"></textarea>
+	<button type="submit">Save Reservation</button>
+</form>
+
+<h2>Your Reservation</h2>
+<ul>
+{{#each reservations}}
+	<li>
+		<p>{{this.name}}, {{this.date}}</p>
+	</li>
+{{/each}}
+</ul>
