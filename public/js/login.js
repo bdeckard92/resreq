@@ -5,7 +5,7 @@ $(document).ready(function () {
   $("#mainPageContent").hide();
 
   var options = {
-    rememberLastLogin: true,
+    rememberLastLogin: false,
     auth: {
       redirect: false
     },
