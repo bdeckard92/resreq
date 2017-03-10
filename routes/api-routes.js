@@ -71,6 +71,31 @@ module.exports = function (app) {
         })
     });
 
+    app.get("/api/getRes/:id", function (req, res) {
+        var userId = req.params.id;
+       
+        db.restaurants.findAll({
+            where: {
+                userId: userId
+            }
+        }).then(function (data) {
+            res.json(data);
+        })
+    });
+
+app.get("/api/getID/:email", function (req, res) {
+        var dbEmail = req.params.email;
+       
+        db.users.findOne({
+            where: {
+                email: dbEmail
+            }
+        }).then(function (data) {
+            res.json(data);
+        })
+    });
+
+
     //---------- ADMIN(USER) ROUTES ----------//
     app.post("/api/newUser", function (req, res) {
         // user's email will be unique
@@ -92,7 +117,7 @@ module.exports = function (app) {
             .then(function (result) {
                 if (result.length === 0) {
                     db.users.create(userObject).then(function (result) {
-                        res.json("new user has been added");
+                        res.json(result);
                     });
                 }
                 else {
