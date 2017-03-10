@@ -11,7 +11,7 @@ var mysql = require("mysql");
 var app = express();
 var port = 8080;
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/views"));
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
@@ -29,16 +29,23 @@ var connection = mysql.createConnection({
 	password: "Bthootu16",
 	database: "reservation_db"
 });
+
 connection.connect(function(err){
 	if(err)throw err;
 	console.log('Connected as id: '+connection.threadId)
 });
-//gets info from database to send to handlebar ul on index.handlebars this works
+/*this will show admin all reservations
 app.get("/",function(req,res){
 	connection.query("SELECT name, date FROM reservations;", function(err,data){
 		res.render('index',{reservations:data});
 	})
 
+});*/
+//var getEmail = (req.body.email);
+app.get("/", function(req,res){
+	connection.query("SELECT name, date FROM reservations WHERE email= getEmail ;", function(err,data){
+		res.render('index', {reservations:data});
+	})
 });
 
 

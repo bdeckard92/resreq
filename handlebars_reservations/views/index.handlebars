@@ -1,14 +1,22 @@
 
 <h1>Create Your Reservation</h1>
 <form method="POST" action="/create">
+	<p>Name</p>
 	<textarea type="text" name= "name"></textarea>
+	<p>Phone Number</p>
 	<textarea type="text" name="phone"></textarea>
+	<p>Email</p>
 	<textarea type= "text" name="email"></textarea>
-	<textarea type= "text" name = "date"></textarea>
+	<p>clilck for Date</p>
+	<input type= "text" id="datetimepicker1" name = "date"></input>
 	<button type="submit">Save Reservation</button>
 </form>
 
 <h2>Your Reservation</h2>
+	<form action="/">
+		<input id="email"></form>
+		<button type="submit">Click to see Reservations</button>
+	</form>
 <ul>
 {{#each reservations}}
 	<li>

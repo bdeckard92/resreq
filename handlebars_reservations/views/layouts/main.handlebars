@@ -3,29 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Reservations</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script src="/layouts/bootstrap-datetimepicker.min.js"></script>
 </head>
 <body>
 	{{{body}}}
 </body>
-<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
-<script type="text/javascript">
-	console.log(5);
-	// var data = {name: "herbert"};
 
-	// var currentUrl = window.location.origin;
-	// $('#res').on('click', function(){
-	// 	var name = $("textarea").attr("name", "name");
-	// 	console.log(name);
-	// 	$.post(currentUrl + '/create',data, function(err){
-	// 		console.log(err);
-	// 		if (err == "alert"){
-	// 			console.log("alert");
-	// 		}
-	// 		else{
-	// 			window.location.reload();
-	// 		}
-	// 	})
-	// });
+<script type="text/javascript">
+	
 
 </script>
+<script>
+$(document).ready(function() {
+        $('#datetimepicker1').datetimepicker({});
+    });
+    </script>
 </html>

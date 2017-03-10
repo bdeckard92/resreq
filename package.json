@@ -19,6 +19,11 @@
   },
   "homepage": "https://github.com/bdeckard92/resreq#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "mysql": "^2.13.0",
+    "path": "^0.12.7",
     "sequelize": "^3.30.2"
   }
 }
