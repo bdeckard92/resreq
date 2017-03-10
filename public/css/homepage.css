@@ -16,7 +16,14 @@
 
 .fb-button{
     margin: 10px;
-
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+}
+.fb-button:hover {
+    background-color: rgb(230,230,230,.6);
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 #mainRow {
