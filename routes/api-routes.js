@@ -14,6 +14,10 @@ module.exports = function (app) {
         res.render("contact", { title: "Contact Page", layout: "main.hbs", condition: true });
     });
 
+    app.get("/allRes", function(req, res){
+        res.render("seeAll", { title: "View All Restaurants", layout: "main.hbs", condition: true })
+    });
+
     //////////// SELECT PAGE ROUTES ////////////
     app.get("/:id/select", function (req, res) {
         res.render("select-index", { title: "Restaurant Selection Page", layout: "main-select.hbs", condition: false });
@@ -40,6 +44,13 @@ module.exports = function (app) {
     });
 
     //////////// API ROUTES ////////////
+    // ---------GET ALL RESTAURANTS---------//
+    app.get("/api/allRes/", function(req,res){
+        db.restaurants.findAll({}).then(function(data){
+            res.json(data);
+        })
+    });
+
     //---------- ADMIN(USER) ROUTES ----------//
     app.get("/api/get/:userId", function (req, res) {
         var userId = req.params.userId;

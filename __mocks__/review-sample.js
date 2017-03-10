@@ -5,7 +5,7 @@ var testData = [{
     name: "dude",
     rate: 4,
     restaurantId: 1,
-    updatedAt: "2017-03-10T02:13
+    updatedAt: "2017-03-10T02:13"
 }];
 
 module.exports = testData;
