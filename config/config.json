@@ -1,9 +1,18 @@
 {
   "development": {
+
     "username": "shjt6pzlybx8mrbk",
     "password": "npvktnxm1g6utiq9",
     "database": "gjunx4m28ihu6jmz",
     "host": "d6ybckq58s9ru745.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+
+
+    "username": "root",
+    "password": "Bthootu16",
+    "database": "database_development",
+    "host": "127.0.0.1",
+
+
     "dialect": "mysql"
   },
   "test": {
