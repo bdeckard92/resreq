@@ -13,7 +13,7 @@
 }*/
 
 #main {
-    margin-bottom: 0px;
+    margin-bottom: 100px;
 }
 
 body {
@@ -118,6 +118,16 @@ p{
 
 a:hover {
     text-decoration: none;
+}
+
+.pic img{
+ width:350px;
+ height:150px;
+ border-style: 2px solid black;   
+}
+input{
+ border-style:2px solid cyan;   
+    margin:15px;
 }
 
 /* accent color: FF5252 

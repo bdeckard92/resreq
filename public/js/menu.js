@@ -6,6 +6,7 @@ $(document).ready(function () {
     var appCateInput = $("#category")
     var applist = $(".applist");
     var app;
+    var resId = localStorage.resId;
     // Adding an event listener for when the form is submitted
     $(document).on("submit", "#app", handleFormSubmit);
     $(document).on("click", "button.delete", deleteItem);
@@ -206,6 +207,135 @@ $(document).ready(function () {
             console.log(updatedItem);
         }
     }
+
+    //The Main View of the menu
+    //reload page after closing add on window to display items
+    $("#save").on("click", function() {
+        location.reload();
+    });
+    //run these functions on start up
+    starter();
+    chicken();
+    steak();
+
+    //appetizer plates
+    function starter() {
+        $.get("/api/menu/"+ resId, function(data) {
+            var ul = $("<ul>");
+            for (i in data) {
+                var li = $("<li>");
+                var a = data[i].Category;
+                if (a === "Appetizer") {
+                    // console.log(data[i]);
+                    li.html("<strong>" + data[i].Name + "</strong>" + "<br>" + data[i].Info + "<br>" + data[i].Price);
+                    ul.append(li);
+                    $("#starter").append(ul);
+                }
+                //console.log("Start display");
+                //app = data;
+                //console.log(data[0]);
+                //displayData(data);
+            }
+        });
+    };
+
+    //chicken plates
+    function chicken() {
+        $.get("/api/menu/"+ resId, function(data) {
+            var ul = $("<ul>");
+            for (i in data) {
+                var li = $("<li>");
+                var a = data[i].Category;
+                if (a === "Chicken") {
+                    // console.log(data[i]);
+                    li.html("<strong>" + data[i].Name + "</strong>" + "<br>" + data[i].Info + "<br>" + data[i].Price);
+                    ul.append(li);
+                    $("#chicken").append(ul);
+                }
+            }
+        });
+    };
+
+    //Steak plates
+    function steak() {
+        $.get("/api/menu/"+ resId, function(data) {
+            var ul = $("<ul>");
+            for (i in data) {
+                var li = $("<li>");
+                var a = data[i].Category;
+                if (a === "Steak") {
+                    // console.log(data[i]);
+                    li.html("<strong>" + data[i].Name + "</strong>" + "<br>" + data[i].Info + "<br>" + data[i].Price);
+                    ul.append(li);
+                    $("#steak").append(ul);
+                }
+            }
+        });
+    };
+
+    //Adding picture for appetizer
+    $(function() {
+        $('#inTag').on('change', function() {
+
+            // get file and pull attributes
+            var input = $(this)[0];
+            var file = input.files[0];
+            // $('h4').show();
+            // $('#file-info').append("<li>Name: " + file.name + "</li>");
+            // $('#file-info').append("<li>Type: " + file.type + "</li>");          
+
+            // load file into preview pane
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imgTag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+
+        });
+    });
+
+    //Adding picture for chicken
+    $(function() {
+        $('#inTag2').on('change', function() {
+
+            // get file and pull attributes
+            var input = $(this)[0];
+            var file = input.files[0];
+            // $('h4').show();
+            // $('#file-info').append("<li>Name: " + file.name + "</li>");
+            // $('#file-info').append("<li>Type: " + file.type + "</li>");          
+
+            // load file into preview pane
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imgTag2').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+
+        });
+    });
+
+    //Adding picture steak
+    $(function() {
+        $('#inTag3').on('change', function() {
+
+            // get file and pull attributes
+            var input = $(this)[0];
+            var file = input.files[0];
+            // $('h4').show();
+            // $('#file-info').append("<li>Name: " + file.name + "</li>");
+            // $('#file-info').append("<li>Type: " + file.type + "</li>");          
+
+            // load file into preview pane
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imgTag3').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+
+        });
+    });    
+
 
 
 });
