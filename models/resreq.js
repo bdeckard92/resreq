@@ -20,10 +20,12 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     reservations: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     },
     delivery: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   },
     {
