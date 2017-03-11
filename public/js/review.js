@@ -12,7 +12,13 @@ $(document).ready(function () {
 
     $("#saveBusinessInfo").on("click", function () {
         var reserveBoolean = $("#busInfo-reserve").val();
+        if(reserveBoolean === 'yes'){
+            reserveBoolean='true';
+        }
         var deliveryBoolean = $("#busInfo-delivery").val();
+        if(deliveryBoolean === 'yes'){
+            deliveryBoolean='true';
+        }
         var sendObject = {
             reservations: reserveBoolean,
             delivery: deliveryBoolean
