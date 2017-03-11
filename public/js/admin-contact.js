@@ -1,13 +1,27 @@
 $(document).ready(function(){
+    
 
-    getResContactInfo()
+    getResContactInfo();
+
+    $("#editHoursButton").on("click", function(e){
+        e.preventDefault();
+        $("#editHoursModal").modal('toggle');
+    });
+
+    $("#saveHours").on("click", function(){
+        var newHours = $("#hourModalBody").val();
+        var hoursObject = {
+            hour: newHours
+        };
+        saveHours(hoursObject);
+    });
 
 });
 
 function getResContactInfo(){
 
  $.ajax({
-         url: "/api/contactInfo/" + localStorage.resId + "/" + localStorage.userId,
+         url: "/api/contactInfo/" + localStorage.userId + "/" + localStorage.resId,
          type: "GET",
          dataType: "json",
          error: function (jqXHR, textStatus, errorThrown) {
@@ -19,7 +33,27 @@ function getResContactInfo(){
         $("#phoneArea").text(data.phone);
         $("#emailArea").text(data.email);
         $("#hoursArea").text(data.hour);
+        $("#hourModalBody").text(data.hour);
 
          console.log(data);
      });
+}
+
+function saveHours(hoursObject){
+ $.ajax({
+         url: "/api/saveHours/" + localStorage.resId + "/" + localStorage.userId,
+         type: "POST",
+         data: hoursObject,
+         dataType: "json",
+         error: function (jqXHR, textStatus, errorThrown) {
+             console.log(jqXHR.responseText);
+         }
+     })
+     .done(function (data) {
+        $("#editHoursModal").modal('toggle');
+        getResContactInfo();
+        
+     });
+
+
 }

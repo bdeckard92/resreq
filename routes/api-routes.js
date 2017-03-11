@@ -122,6 +122,30 @@ app.get("/api/getID/:email", function (req, res) {
     });
 
 
+    app.post("/api/saveHours/:userId/:resId", function(req, res){
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+    db.restaurants.update({
+       hour: req.body.hour
+    }, {
+      where: {
+          id: resId,
+     userId: userId
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+    });
+
+
+
+
+
+
+    
+
+
     //---------- ADMIN(USER) ROUTES ----------//
     app.post("/api/newUser", function (req, res) {
         // user's email will be unique
