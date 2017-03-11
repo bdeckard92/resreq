@@ -136,11 +136,39 @@ app.get("/api/getID/:email", function (req, res) {
     }).then(function(data) {
       res.json(data);
     });
+});
+
+    app.post("/api/saveBusinessInfo/:userId/:resId", function(req, res){
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+    db.restaurants.update({
+       reservations: req.body.reservations,
+       delivery: req.body.delivery
+    }, {
+      where: {
+          id: resId,
+     userId: userId
+      }
+    }).then(function(data) {
+      res.json(data);
     });
+});
 
+ app.get("/api/getBusInfo/:userId/:resId", function (req, res) {
+        var resId = req.params.resId;
+        var userId = req.params.userId;
 
-
-
+        db.restaurants.findOne({
+            include: [db.users],
+            where: {
+                userId: userId,
+                id: resId
+            }
+        }).then(function (data) {
+            res.json(data);
+        });
+    });
 
 
     

@@ -18,6 +18,12 @@ module.exports = function (sequelize, DataTypes) {
     },
     email: {
       type: DataTypes.STRING
+    },
+    reservations: {
+      type: DataTypes.BOOLEAN
+    },
+    delivery: {
+      type: DataTypes.BOOLEAN
     }
   },
     {
