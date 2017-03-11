@@ -5,7 +5,7 @@ $(document).ready(function () {
   $("#mainPageContent").hide();
 
   var options = {
-    rememberLastLogin: true,
+    rememberLastLogin: false,
     auth: {
       redirect: false
     },
@@ -118,6 +118,7 @@ $(document).ready(function () {
     $('.btn-login').hide();
     $('.avatar').attr('src', profile.picture).show();
     $('.btn-logout').show();
+    $("#btn-select").show();
     // $.get("/select", function (data) {
     //   console.log(data);
     // });

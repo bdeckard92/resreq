@@ -14,6 +14,10 @@ module.exports = function (app) {
         res.render("contact", { title: "Contact Page", layout: "main.hbs", condition: true });
     });
 
+    app.get("/allRes", function(req, res){
+        res.render("seeAll", { title: "View All Restaurants", layout: "main.hbs", condition: true })
+    });
+
     //////////// SELECT PAGE ROUTES ////////////
     app.get("/:id/select", function (req, res) {
         res.render("select-index", { title: "Restaurant Selection Main", layout: "main-select.hbs", condition: false });
@@ -46,6 +50,13 @@ module.exports = function (app) {
     });
 
     //////////// API ROUTES ////////////
+    // ---------GET ALL RESTAURANTS---------//
+    app.get("/api/allRes/", function(req,res){
+        db.restaurants.findAll({}).then(function(data){
+            res.json(data);
+        })
+    });
+
     //---------- ADMIN(USER) ROUTES ----------//
     app.get("/api/get/:userId", function (req, res) {
         var userId = req.params.userId;
@@ -100,6 +111,73 @@ module.exports = function (app) {
             res.json(data);
         })
     });
+
+ app.get("/api/contactInfo/:userId/:resId", function (req, res) {
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+        db.restaurants.findOne({
+            include: [db.users],
+            where: {
+                userId: userId,
+                id: resId
+            }
+        }).then(function (data) {
+            res.json(data);
+        });
+    });
+
+
+    app.post("/api/saveHours/:userId/:resId", function(req, res){
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+    db.restaurants.update({
+       hour: req.body.hour
+    }, {
+      where: {
+          id: resId,
+     userId: userId
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+});
+
+    app.post("/api/saveBusinessInfo/:userId/:resId", function(req, res){
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+    db.restaurants.update({
+       reservations: req.body.reservations,
+       delivery: req.body.delivery
+    }, {
+      where: {
+          id: resId,
+     userId: userId
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+});
+
+ app.get("/api/getBusInfo/:userId/:resId", function (req, res) {
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+        db.restaurants.findOne({
+            include: [db.users],
+            where: {
+                userId: userId,
+                id: resId
+            }
+        }).then(function (data) {
+            res.json(data);
+        });
+    });
+
+
+    
 
 
     //---------- ADMIN(USER) ROUTES ----------//
