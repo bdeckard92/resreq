@@ -1,5 +1,4 @@
-$(document).ready(function(){
-    
+$(document).ready(function(){    
 
     getResContactInfo();
 
@@ -14,6 +13,10 @@ $(document).ready(function(){
             hour: newHours
         };
         saveHours(hoursObject);
+    });
+
+    $("#editContactButton").on("click", function(){
+        $("#editContactModal").modal('toggle');
     });
 
 });
