@@ -307,6 +307,18 @@ module.exports = function (app) {
             res.json(data);
         })
     });
+    app.get("/api/resv/getresvd/:resId", function (req, res) {
+        var resId = req.params.resId;
+        db.rsvps.findAll({
+            where: {
+                restaurantId: resId,
+                reserved: true
+            },
+            order: 'date'
+        }).then(function (data) {
+            res.json(data);
+        })
+    });
     app.put("/api/resv/put", function (req, res) {
         db.rsvps.update({
             name: req.body.name,

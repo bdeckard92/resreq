@@ -85,9 +85,60 @@ $(document).ready(function () {
     // get all the reservations that belong to the resId
     function getRESV() {
         $.get("/api/resv/get/" + localStorage.resId, function (data) {
-            console.log(data);
+            //console.log(data);
             createRESV(data);
         });
+    }
+
+    function getRESVbyReserved() {
+        $.get("/api/resv/getresvd/" + localStorage.resId, function (data) {
+            //console.log(data);
+            createRESVDisplay(data);
+            
+        });
+    }
+
+    function createRESVDisplay(resv){
+        var table = $('<table class="table table-hover">')
+        var thead = $('<thead>');
+        var row = $('<tr>');
+        var th = $('<th>');
+        th.text('DATE');
+        row.append(th);
+        var th = $('<th>');
+        th.text('TIME');
+        row.append(th);
+        var th = $('<th>');
+        th.text('NAME');
+        row.append(th);
+        var th = $('<th>');
+        th.text('PHONE');
+        row.append(th);
+        thead.append(row);
+        table.append(thead);
+        var tbody = $('<tbody>');
+        
+        for (i in resv){
+            var tr = $('<tr>');
+            console.log(resv[i]);
+            var td = $('<td>');
+            td.text(resv[i].date);
+            tr.append(td);
+            var td = $('<td>');
+            td.text(resv[i].time);
+            tr.append(td);
+            var td = $('<td>');
+            td.text(resv[i].name);
+            tr.append(td);
+            var td = $('<td>');
+            td.text(resv[i].phone);
+            tr.append(td);
+            tbody.append(tr);
+            
+        }
+        table.append(tbody);
+        $('#resv-display').html(table);
+
     }
 
     function calRESV(resv) {
@@ -206,6 +257,7 @@ $(document).ready(function () {
         })
             .done(function () {
                 getRESV();
+                getRESVbyReserved();
                 // $('.btn-route[resv-id=' + localStorage.resvId + ']').attr("disabled", true);
                 // $('.btn-route[resv-id=' + localStorage.resvId + ']').attr("data-toggle", "");
             });
@@ -235,6 +287,7 @@ $(document).ready(function () {
 
     });
     getRESV();
+    getRESVbyReserved();
 
 
 });
