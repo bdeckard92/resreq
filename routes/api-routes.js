@@ -106,6 +106,21 @@ app.get("/api/getID/:email", function (req, res) {
         })
     });
 
+ app.get("/api/contactInfo/:userId/:resId", function (req, res) {
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+        db.restaurants.findOne({
+            include: [db.users],
+            where: {
+                userId: userId,
+                id: resId
+            }
+        }).then(function (data) {
+            res.json(data);
+        });
+    });
+
 
     //---------- ADMIN(USER) ROUTES ----------//
     app.post("/api/newUser", function (req, res) {
