@@ -13,7 +13,7 @@
 }*/
 
 #main {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 body {
@@ -41,9 +41,9 @@ h3{
     }
 
 h4{
-    font-family: 'Gotham-rg', sans-serif;
-    font-size: 10px;    
-    letter-spacing: 2px;
+    font-family: 'Gotham-md', sans-serif;
+    font-size: 14px;    
+    letter-spacing: 3x;
     text-transform: uppercase;
     }
 
@@ -86,14 +86,13 @@ p{
 .btn-default {
         color: #fff;
     background-color: #000000;
-    border-radius: 0;
+    border-radius: 10px;
     border:none;
 
 }
 
 .btn-default:hover{
-        color: #000000;
-    border-radius: 0;
+        color: #000000;    
      border:none;
 
 }
