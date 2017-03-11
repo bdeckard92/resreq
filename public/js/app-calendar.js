@@ -52,6 +52,7 @@ $(document).ready(function () {
 	var calendarStartDate = tempYear + "-" + tempMonth + "-" + tempDay;
 	// 2017-03-18
 
+	// open event modal with data
 	$(document).on("click", ".event-item", function (e) {
 		// console.log($(this).data("eventid"));
 		// var name = 'show';
@@ -100,8 +101,9 @@ $(document).ready(function () {
 			list.html('');
 
 			$.each(events, function (key, val) {
+				
 				var newList = $("<li>");
-
+				
 				newList.attr('data-eventid', val.id);
 				newList.addClass("list-group-item event-item");
 

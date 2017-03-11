@@ -14,9 +14,19 @@ module.exports = function (app) {
         res.render("contact", { title: "Contact Page", layout: "main.hbs", condition: true });
     });
 
+    app.get("/allRes", function(req, res){
+        res.render("seeAll", { title: "View All Restaurants", layout: "main.hbs", condition: true })
+    });
+
     //////////// SELECT PAGE ROUTES ////////////
     app.get("/:id/select", function (req, res) {
-        res.render("select-index", { title: "Restaurant Selection Page", layout: "main-select.hbs", condition: false });
+        res.render("select-index", { title: "Restaurant Selection Main", layout: "main-select.hbs", condition: false });
+    });
+    app.get("/:id/create", function (req, res) {
+        res.render("select-create", { title: "Restaurant Create Page", layout: "main-select.hbs", condition: true });
+    });
+    app.get("/:id/update", function (req, res) {
+        res.render("select-update", { title: "Restaurant Update Page", layout: "main-select.hbs", condition: true });
     });
 
     //////////// ADMIN PAGE ROUTES ////////////
@@ -40,6 +50,13 @@ module.exports = function (app) {
     });
 
     //////////// API ROUTES ////////////
+    // ---------GET ALL RESTAURANTS---------//
+    app.get("/api/allRes/", function(req,res){
+        db.restaurants.findAll({}).then(function(data){
+            res.json(data);
+        })
+    });
+
     //---------- ADMIN(USER) ROUTES ----------//
     app.get("/api/get/:userId", function (req, res) {
         var userId = req.params.userId;
@@ -71,6 +88,98 @@ module.exports = function (app) {
         })
     });
 
+    app.get("/api/getRes/:id", function (req, res) {
+        var userId = req.params.id;
+
+        db.restaurants.findAll({
+            where: {
+                userId: userId
+            }
+        }).then(function (data) {
+            res.json(data);
+        })
+    });
+
+    app.get("/api/getID/:email", function (req, res) {
+        var dbEmail = req.params.email;
+
+        db.users.findOne({
+            where: {
+                email: dbEmail
+            }
+        }).then(function (data) {
+            res.json(data);
+        })
+    });
+
+ app.get("/api/contactInfo/:userId/:resId", function (req, res) {
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+        db.restaurants.findOne({
+            include: [db.users],
+            where: {
+                userId: userId,
+                id: resId
+            }
+        }).then(function (data) {
+            res.json(data);
+        });
+    });
+
+
+    app.post("/api/saveHours/:userId/:resId", function(req, res){
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+    db.restaurants.update({
+       hour: req.body.hour
+    }, {
+      where: {
+          id: resId,
+     userId: userId
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+});
+
+    app.post("/api/saveBusinessInfo/:userId/:resId", function(req, res){
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+    db.restaurants.update({
+       reservations: req.body.reservations,
+       delivery: req.body.delivery
+    }, {
+      where: {
+          id: resId,
+     userId: userId
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+});
+
+ app.get("/api/getBusInfo/:userId/:resId", function (req, res) {
+        var resId = req.params.resId;
+        var userId = req.params.userId;
+
+        db.restaurants.findOne({
+            include: [db.users],
+            where: {
+                userId: userId,
+                id: resId
+            }
+        }).then(function (data) {
+            res.json(data);
+        });
+    });
+
+
+    
+
+
     //---------- ADMIN(USER) ROUTES ----------//
     app.post("/api/newUser", function (req, res) {
         // user's email will be unique
@@ -92,7 +201,7 @@ module.exports = function (app) {
             .then(function (result) {
                 if (result.length === 0) {
                     db.users.create(userObject).then(function (result) {
-                        res.json("new user has been added");
+                        res.json(result);
                     });
                 }
                 else {
@@ -229,7 +338,6 @@ module.exports = function (app) {
             res.json(eventInfo);
         });
     });
-
     // Display Event Modal - Listener
     app.get("/api/events/:eventID", function (req, res) {
         db.events.findOne({
@@ -239,6 +347,68 @@ module.exports = function (app) {
         }).then(function (result) {
             res.json(result);
         });
+    });
+
+    //---------- RESERVATION ROUTES ----------//
+    // add new reservation date and times
+    // app.post("/api/resv/create", function (req, res) {
+    //     // db.events.create
+    //     console.log("im here");
+    //     //console.log(req.body.resv_array);
+    //     var data = req.body.resv_array;
+    //     for (i in data) {
+    //         console.log(data[i]);
+    //         callback(data[i])
+
+
+    //     }
+    //     function callback(data) {
+    //         db.rsvps.create(data).then(function (result) {
+    //             res.json(result);
+    //         });
+    //     }
+    // });
+    app.post("/api/resv/create", function (req, res) {
+        db.rsvps.create(req.body).then(function (result) {
+            res.json(result);
+        });
+
+    });
+    app.get("/api/resv/get/:resId", function (req, res) {
+        var resId = req.params.resId;
+        db.rsvps.findAll({
+            where: {
+                restaurantId: resId
+            },
+            order: 'date'
+        }).then(function (data) {
+            res.json(data);
+        })
+    });
+    app.get("/api/resv/getresvd/:resId", function (req, res) {
+        var resId = req.params.resId;
+        db.rsvps.findAll({
+            where: {
+                restaurantId: resId,
+                reserved: true
+            },
+            order: 'date'
+        }).then(function (data) {
+            res.json(data);
+        })
+    });
+    app.put("/api/resv/put", function (req, res) {
+        db.rsvps.update({
+            name: req.body.name,
+            phone: req.body.phone,
+            reserved: req.body.reserved
+        }, {
+                where: {
+                    id: req.body.id
+                }
+            }).then(function (rsvps) {
+                res.json(rsvps);
+            });
     });
 
 };

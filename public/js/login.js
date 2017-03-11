@@ -5,7 +5,7 @@ $(document).ready(function () {
   $("#mainPageContent").hide();
 
   var options = {
-    rememberLastLogin: true,
+    rememberLastLogin: false,
     auth: {
       redirect: false
     },
@@ -35,6 +35,8 @@ $(document).ready(function () {
         // log user in and show their profile info
         retrieve_profile();
         show_profile_info(profile);
+        // set the localstorage user id based on their email
+        setUserId(profile.email);
         $("#mainPageContent").show();
         console.log("user authenticated");
         localStorage.setItem("login", profile.identities["0"].userId);
@@ -66,6 +68,8 @@ $(document).ready(function () {
       localStorage.setItem('access_token', authResult.accessToken);
       localStorage.setItem('user_email', profile.email);
       localStorage.setItem("login", profile.identities["0"].userId);
+      setUserId(profile.email);
+      
       // Display user information
       show_profile_info(profile);
       // route to the selection page
@@ -81,8 +85,11 @@ $(document).ready(function () {
       firstname: newUser.givenName,
       lastname: newUser.familyName,
     };
-    $.post(currentURL + "/api/newUser", newUserObject).then(function (data) {
+    $.post(currentURL + "/api/newUser", newUserObject)
+    .then(function (data) {
       console.log(data);
+      // SET THE LOCALSTORAGE USERID ONCE THEY ARE ADDED TO DB
+      localStorage.setItem("userId", data.id);
       console.log("new user data sent");
     }, function (err) {
       console.log(err);
@@ -99,6 +106,7 @@ $(document).ready(function () {
         }
         // Display user information
         show_profile_info(profile);
+        setUserId(profile.email);
         console.log(profile);
       });
     }
@@ -110,6 +118,7 @@ $(document).ready(function () {
     $('.btn-login').hide();
     $('.avatar').attr('src', profile.picture).show();
     $('.btn-logout').show();
+    $("#btn-select").show();
     // $.get("/select", function (data) {
     //   console.log(data);
     // });
@@ -117,11 +126,28 @@ $(document).ready(function () {
 
   var logout = function () {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('userId');
     window.location.href = "/";
     $("#mainPageContent").hide();
   };
   retrieve_profile();
+
+  function setUserId(email){
+                   $.ajax({
+                        url: "/api/getID/" + email,
+                        type: "GET",
+                        dataType: "json",
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(jqXHR.responseText);
+                        }
+                    })
+                    .done(function (data) {
+                     localStorage.setItem("userId", data.id);
+                            });
+  }
 });
+
+
 
 
 
