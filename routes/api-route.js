@@ -21,11 +21,11 @@ module.exports = function(app) {
     });
   });
 
-   // GET route for getting all of the appetizers
+   // GET route for getting all of the menu
   app.get("/api/menu", function(req, res) {
     // findAll returns all entries for a table when used with no options
     db.start.findAll({}).then(function(dbstart) {
-      // We have access to the appetizer as an argument inside of the callback function
+      // We have access to the menu as an argument inside of the callback function
       res.json(dbstart);
     });
   });

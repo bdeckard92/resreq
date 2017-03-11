@@ -4,3 +4,18 @@
   line-height: .5;
   margin-top: 3px;
 }
+
+.jumbotron {
+	text-align: center;
+}
+
+img{
+ width:350px;
+ height:150px;
+ border-style: 2px solid black;   
+}
+input{
+ border-style:2px solid cyan;   
+    margin:15px;
+}
+
